@@ -1,0 +1,184 @@
+This mod is released as open-source software without a specific license, which could be possibly problematic, as our mod uses many features written by various community members As attaching a proper licence (such as GNU GPL) requires copyrighting the code. This would include contacting all those creators and asking them for permission. The main part of the problem is that some of these people are no longer active. Thus we decided to use the original Silverstag licence, available on the forum, with some modifications.
+
+1. You can make a new mod based on Silverstag, provided that:
+
+    - The new mod may not use the Silverstag name as part of its name to prevent confusion.
+    - The Silverstag team and other content creators should be credited for their work. You can find the list on the bottom of this file.
+    - We'd appreciate being made aware of your mod project. We'll even help promote it within Silverstag's forum.
+
+2. You can freely make and host it within the Silverstag forums.
+We actively encourage this. Sub-mods may retain the Silverstag name as long as it is clear that it is a sub-mod (example: "Silverstag: <sub-mod name>" or <patch name> (Silverstag v0.23 Patch)). We're not as concerned with how you name it such as that it is clear to the community what it is and which version of Silverstag it is compatible with.
+
+3. You can pull a feature from Silverstag to put in another mod.
+Please note that Silverstag is heavily reliant upon the Warband Script Enhancer (WSE) to function and each of its features are very interrelated which makes it difficult to pull out an individual one.  Any features pulled out that are not specificly created by the Silverstag team have been credited within our download thread on the Taleworlds forum.  Please ensure you're giving credit to the correct folks and if you're unsure I'd be happy to answer questions of this nature. To make matters more clear and easy to follow, the list of content creators other than Silverstag team is a part of this license. Model resource files (.brf files) are named by their creators.
+
+4. We do not provide technical support for any of the above?.
+The source files are well segregated into modmerger kits and generally follow a naming convention that will point you in the right direction of where to look.  If you're unsure where something is after looking we can help you with that, but we're generally not interested in giving detailed instructions on how to remove / alter a feature within the mod.  It really depends on the number of and nature of the requests. We also may write documentation for the mod at some point.
+
+
+MODULE SYSTEM SETUP NOTES:
+
+    "compile.bat" is the main compiling batch file to use. Check the "slots" excel file within the documentation folder to see where slot numbers have been used by the various source kits.  This information should be up to date.
+    When scripts are used from a source not within the main module_scripts or the kit you're currently within it will generally have a comment following stating which file to look into.  A common exception to this are "gpu" scripts which are found in the generic presentation utilities kit for building interfaces.
+    There are a number of kits that are retained solely for preserving save games and will be removed upon the next save breaking update.  Some of these caused issues while integrated and just have not had their resources / code removed entirely or were left in a disabled state.  Beta Testing Suite, Dynamic Damage and Emoticons are all examples of this and should be left disabled.
+
+
+
+Thanks for your interest and I hope you can gain some use out of the materials supplied.  I look forward to seeing what creations you come up with and would love to hear about them for possible inclusion into the Silverstag mod.
+
+Good Luck,
+Windyplains
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Credits to content creators:
+
+CMPXCHG8B	WARBAND SCRIPT ENHANCER 3.2.0
+A great deal of information and support in fixing stability & operation issues.
+
+FLORIS MOD TEAM
+Leaving your liege's faction.
+Nissa Companion.  Concept & dialog is taken from the Odval companion of Floris.
+The ability to see item requirements in presentations.
+Design influence for the encumbrance system.
+
+SPHERE
+Modmerger
+Game Options kit
+Dynamic Arrays system
+
+CABA'DRIN
+Pre-Battle Orders & Deployment
+Fast Travel Pausing
+Trade Ledger
+Mobile Village Raiding & Castle Sieging
+
+MOTOMATARU
+Battle Formations
+
+ADORNO
+Arena Overhaul Mod
+
+JRIDER
+Enhanced Relation Reports (1.2)
+
+DUNDE
+Item Pack: Heraldic Horses
+Crouch stance & walking (included within PBOD)
+Simplified KeyConfig Presentation (included within PBOD)
+
+RUBIK
+Troop Ratio Bar
+View All Items
+Configuration screen for purchasing food. (from Custom Commander)
+Companion import / export capability (from Custom Commander)
+
+NEMCHENK
+Ethnic Troops
+
+DOMA
+Cinematic Compilation
+
+MADOCCOMADRIN
+Custom Clan Banner Pack
+
+MORTAL
+Mortal Women Sound Pack
+
+ZSAR & JUJU70
+Indictment Death Spiral Fix
+
+THE MERCENARY
+Spear Bracing Kit (included within PBOD)
+
+CARTREAD
+Deployable Pavises (included within PBOD)
+
+NARF OF PICKLESTINK
+Item Pack: Transitional Armor Pack (heraldic plate)
+Item Pack: Rus Armour Pack
+Item Pack: Men-at-Arms
+Item Pack: Plate Armour Pack
+
+EL GUANCHE & MIRATHEI
+Fire Arrows (included within PBOD)
+
+XENOARGH
+Shield Bashing (code) (included within PBOD)
+Simple Loot System (partial use)
+Item Pack: Camels
+
+PAPA LAZAROU
+Shield Bashing (animation) (included within PBOD)
+
+DEJAWOLF
+Item Pack: Viking Module Pack
+Item Pack: Medieval Helmet Pack
+
+RURALVIRGINIAN
+Revamped inventory screen textures.
+
+MADVADER
+Death camera (included within PBOD)
+Save game load detection script.
+
+ZAGIBU
+Item Pack: Heraldic Armors
+
+NEIL_V
+Blood Enhancement Tweak v0.5
+
+SLAWOMIR OF AAARRGHH
+Tavern Animation Pack
+
+DRTOMAS
+Body-sliding In Combat - (1257 AD)
+
+LLEW
+Item Pack: Highlander Models
+
+JAN TUMA
+Item Pack: Sturmhaube
+
+BLOC
+Item Pack: Northerner Horses
+
+WILK22
+Item Pack: Hussar Wing
+
+AL_MANSUR
+Item Pack: Helmet Pack
+
+NJUNJA
+Item Pack: Eastern Items
+
+YAMABUSI
+Item Pack: Highlander Models
+
+CRUSADERS WAY TO EXPIATION TEAM
+Item Pack: CWE models and textures
+
+WILHELM
+Item pack: Ultimate 17th Century Pack
+
+SILVERSTAG TESTERS:
+Barnolo (v0.15-0.23)
+Diessa (v0.15)
+Joelnh (v0.15-0.23)
+Michlo (v0.15)
+Mylae (v0.15)
+Ruralvirginian (v0.15)
+Kraven (v0.18-0.23)
+Huillam (v0.18-0.23)
+Ranik (v0.18-0.23)
+Dagg929 (v0.19-0.23)
+Karl XII (v0.19-0.23)
+
+TEAM MEMBERS
+Windyplains
+Dawg of War (v0.13-v0.24)
+Leifdin (v0.24+)
+D3monic (v0.27+)
+
+CONTRIBUTORS
+Huillam (Vaegir Troops)
