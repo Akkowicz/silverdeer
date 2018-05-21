@@ -1,6 +1,6 @@
 # Silverstag Emblems by Windyplains
 
-EMBLEM_MAX_QUANTITY                  = 50
+EMBLEM_MAX_QUANTITY                  = 100
 SILVERSTAG_EMBLEM                    = "itm_silverstag_emblem"
 
 ## PARTY SLOTS
