@@ -1741,8 +1741,6 @@ except:
 
 if 'depth_operations' not in globals():
 	depth_operations = [try_begin, try_for_range, try_for_range_backwards, try_for_parties, try_for_agents, try_for_prop_instances]
-	try: depth_operations.extend([try_for_prop_instances, try_for_players])
-	except: pass
 
 try:
 	from module_constants import *
