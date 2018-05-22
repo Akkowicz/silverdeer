@@ -8140,7 +8140,10 @@ game_menus = [
      (str_store_party_name, s2, "$g_center_to_give_to_player"),
      (party_get_slot, ":new_owner", "$g_center_to_give_to_player", slot_town_lord),
      (str_store_troop_name, s5, ":new_owner"),
-     (assign, reg6, 900),
+	 (party_get_slot, ":money", "$g_center_to_give_to_player", slot_town_prosperity),
+	 (val_mul, ":money", 30),
+	 (val_add, ":money", 600),
+     (assign, reg6, ":money"),
 	 
 	 (assign, "$g_castle_requested_by_player", -1),
 	 (assign, "$g_castle_requested_for_troop", -1),
@@ -8177,7 +8180,10 @@ game_menus = [
      (str_store_party_name, s2, "$g_center_to_give_to_player"),
      (party_get_slot, ":new_owner", "$g_center_to_give_to_player", slot_town_lord),
      (str_store_troop_name, s5, ":new_owner"),
-     (assign, reg6, 900),
+	 (party_get_slot, ":money", "$g_center_to_give_to_player", slot_town_prosperity),
+	 (val_mul, ":money", 30),
+	 (val_add, ":money", 600),
+     (assign, reg6, ":money"),
 
 	 (assign, "$g_castle_requested_by_player", -1),
 	 (assign, "$g_castle_requested_for_troop", -1),
