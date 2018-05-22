@@ -2027,7 +2027,6 @@ scripts = [
 			(call_script, "script_cf_ce_stamina_bar_has_background_presentation"),
 			
 			(set_fixed_point_multiplier, 1000),
-			(assign, ":obj_bar", "$obj_stamina_bar"),
 			# Figure out what % stamina the agent has.
 			(agent_get_slot, ":max_stamina", ":agent_no", slot_agent_max_stamina),
 			(agent_get_slot, ":current_stamina", ":agent_no", slot_agent_current_stamina),
@@ -2046,7 +2045,7 @@ scripts = [
 			(position_set_x, pos1, ":current_width"),
 			(position_set_y, pos1, ":bar_height"),
 			(set_fixed_point_multiplier, 1000),
-			(overlay_set_size, ":obj_bar", pos1),
+			(overlay_set_size, "$obj_stamina_bar", pos1),
 		(try_end),
 	]),
 	
