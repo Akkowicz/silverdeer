@@ -2158,7 +2158,7 @@ prisoner_talk_addon	= [
 			(assign, ":honor_change", 1),
 		(try_end),
 		# Change player relation with the prisoner.
-		(call_script,"script_change_player_relation_with_troop", "$g_talk_troop", ":relation_change"),
+		(call_script,"script_change_player_relation_with_troop", "$g_talk_troop", ":relation_change", 1),
 		# Improve player honor.
 		(call_script, "script_change_player_honor", ":honor_change"),
 		# Release the prisoner.

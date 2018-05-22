@@ -9,6 +9,11 @@ from module_constants import *
 # DEBUG_READING                          = 0   # ON (1) / OFF (0) - Displays all of the undefined debug messages.  Set to 2 will enable -very- verbose information.
 
 # TROOP SLOTS
+
+# CMS RETURN LOCATIONS: $cms_return_location
+CMS_RETURN_CAMP						= 1
+CMS_RETURN_OATHBOUND				= 2
+
 ###########################################################################################################################
 #####                                         COMBINED TROOP / PARTY SLOTS                                            #####
 ###########################################################################################################################

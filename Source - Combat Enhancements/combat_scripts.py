@@ -31,8 +31,8 @@ scripts = [
 		(troop_set_slot, ":troop_no", slot_troop_requirement_3, BONUS_ADMINISTRATOR),
 		## NPC3 - Ymira
 		(assign, ":troop_no", "trp_npc3"),
-		(troop_set_slot, ":troop_no", slot_troop_requirement_1, BONUS_INSPIRING),
-		(troop_set_slot, ":troop_no", slot_troop_requirement_2, BONUS_QUICK_STUDY),
+		(troop_set_slot, ":troop_no", slot_troop_requirement_1, BONUS_QUICK_STUDY),
+		(troop_set_slot, ":troop_no", slot_troop_requirement_2, BONUS_INSPIRING),
 		(troop_set_slot, ":troop_no", slot_troop_requirement_3, BONUS_ADMINISTRATOR),
 		## NPC4 - Rolf
 		(assign, ":troop_no", "trp_npc4"),
@@ -466,6 +466,12 @@ scripts = [
 		(else_try),
 			(eq, ":prereq", PREREQ_LIEGE_RELATION),
 			(str_store_string, s31, "@LIEGE RELATION"),
+		(else_try),
+			(eq, ":prereq", PREREQ_HIGH_UPKEEP),
+			(str_store_string, s31, "@HIGH UPKEEP"),
+		(else_try),
+			(eq, ":prereq", PREREQ_EXPENSIVE),
+			(str_store_string, s31, "@EXPENSIVE"),
 		(else_try), 
 			### DEFAULT RESPONSE ###
 			(str_store_string, s31, "@UNDEFINED"),
@@ -869,9 +875,9 @@ scripts = [
 			(str_store_string, s1, "@This {s2} is adept at boosting your renown with retelling the tales of your exploits."),
 			(str_store_string, s32, "@Type: Boost\
 									^^Effect #1:\
-									^The renown you gain from combat is increased by 2\
+									^The renown you gain from combat is increased by +3%\
 									^per rank of Persuasion.  This effect may not exceed\
-									^a total of +15 renown per battle."),
+									^a total of +100% renown per battle."),
 		
 		(else_try),
 			(eq, ":ability", BONUS_SILVER_TONGUED),
@@ -898,7 +904,10 @@ scripts = [
 									^Your shield bash attempts now apply +2 damage per\
 									^point of Strength and per rank of Shield.  This\
 									^damage is mitigated normally by armor reducing\
-									^its effectiveness."),
+									^its effectiveness.\
+									^^Effect #2:\
+									^You ignore any encumbrance penalties to the\
+									^Shield skill."),
 		
 		(else_try),
 			(eq, ":ability", BONUS_THRIFTY),
@@ -1071,7 +1080,7 @@ scripts = [
 									^by reloading 1% faster for every three points of\
 									^proficiency you have in that type of weapon.\
 									^^Note: ^This applies only to crossbows, muskets \
-									or pistols."),
+									^or pistols."),
 		
 		(else_try),
 			(eq, ":ability", BONUS_FIRING_CAPTAIN),
@@ -1114,6 +1123,17 @@ scripts = [
 									^^Synergy (Inspiring):\
 									^Your courage boosting effect is increased by +30%.\
 									^^Note: ^This applies to all ranged weapons."),
+		
+		(else_try),
+			(eq, ":ability", BONUS_MULTICULTURAL), # Player only ability.
+			(str_store_string, s31, "@MULTICULTURAL"),
+			(str_store_string, s1, "@Undescribed."),
+			(str_store_string, s32, "@Type: Party Benefit\
+									^^Effect #1:\
+									^Every troop under your command is treated as if \
+									^they have the 'Dedicated' ability reducing their \
+									^negative impact to your party morale caused by \
+									^party unity."),
 		
 		(else_try), 
 			### DEFAULT RESPONSE ### 
@@ -1319,8 +1339,7 @@ scripts = [
 				(this_or_next|eq, ":troop_no", "trp_player"),
 				(is_between, ":troop_no", companions_begin, companions_end),
 				(store_skill_level, ":renown_troop", "skl_persuasion", ":troop_no"),
-				(val_mul, ":renown_troop", 5),
-				(val_max, ":renown_troop", 5),
+				(val_mul, ":renown_troop", 3),
 				(val_add, ":renown_bonus_hero", ":renown_troop"),
 				(assign, reg39, 1), ## DIAGNOSTIC ##
 			(else_try),
@@ -1461,6 +1480,12 @@ scripts = [
 		(store_mul, ":sneak_penalty", ":party_sneaking_size", 4),
 		(store_sub, ":DC_sneaking", 100, ":sneak_penalty"),
 		
+		# Add base party spotting & tracking.
+		(party_get_skill_level, ":skill", ":party_sneaking", "skl_tracking"),
+		(val_add, ":DC_sneaking", ":skill"),
+		(party_get_skill_level, ":skill", ":party_sneaking", "skl_spotting"),
+		(val_add, ":DC_sneaking", ":skill"),
+		
 		(call_script, "script_ce_get_party_stealth_rating", ":party_sneaking"),
 		(assign, ":stealth_rating", reg1),
 		(val_add, ":DC_sneaking", ":stealth_rating"),
@@ -1483,7 +1508,7 @@ scripts = [
 		
 		### DIAGNOSTIC+ ###
 		(try_begin),
-			(ge, BETA_TESTING_MODE, 1),
+			(ge, DEBUG_TROOP_ABILITIES, 2),
 			(assign, reg31, ":DC_sneaking"),
 			(assign, reg32, ":sneak_penalty"),
 			(assign, reg33, ":stealth_rating"),
@@ -1621,19 +1646,8 @@ scripts = [
 		(val_div, ":total_weight", 10), # Bring the size down due to raising fixed point multiplier to 1000.
 		
 		## DETERMINE ENCUMBRANCE
-		(try_begin),
-			(store_div, ":encumbrance", ":total_weight", 100),
-			# (try_begin),
-				# (gt, ":encumbrance", 100),
-				# (val_div, ":encumbrance", 10),
-			# (try_end),
-			(val_sub, ":encumbrance", 15),
-			# (call_script, "script_cf_ce_troop_has_ability", ":troop_no", BONUS_ENDURANCE),
-			# (assign, "$recursive_skill_block", "skl_athletics"),
-			# (store_skill_level, ":athletics_bonus", "skl_athletics", ":troop_no"),
-			# (assign, "$recursive_skill_block", -1),
-			# (val_sub, ":encumbrance", ":athletics_bonus"),
-		(try_end),
+		(store_div, ":encumbrance", ":total_weight", 100),
+		(val_sub, ":encumbrance", 15),
 		
 		## DETERMINE SKILL PENALTIES
 		(store_attribute_level, ":STR", ":troop_no", ca_strength),
@@ -1667,6 +1681,10 @@ scripts = [
 			(store_sub, ":penalty", ":encumbrance", ":STR"),
 			(val_div, ":penalty", 8),
 			(assign, ":encumbrance_skill_penalty", ":penalty"),
+			(try_begin),
+				(call_script, "script_cf_ce_troop_has_ability", ":troop_no", BONUS_SAVAGE_BASH),
+				(assign, ":encumbrance_skill_penalty", 0),
+			(try_end),
 			# Diagnostic
 			(assign, reg31, ":encumbrance_skill_penalty"),
 			(str_store_string, s32, "@Shield (-{reg31})"),
@@ -2027,6 +2045,7 @@ scripts = [
 			(call_script, "script_cf_ce_stamina_bar_has_background_presentation"),
 			
 			(set_fixed_point_multiplier, 1000),
+			(assign, ":obj_bar", "$obj_stamina_bar"),
 			# Figure out what % stamina the agent has.
 			(agent_get_slot, ":max_stamina", ":agent_no", slot_agent_max_stamina),
 			(agent_get_slot, ":current_stamina", ":agent_no", slot_agent_current_stamina),
@@ -2045,7 +2064,7 @@ scripts = [
 			(position_set_x, pos1, ":current_width"),
 			(position_set_y, pos1, ":bar_height"),
 			(set_fixed_point_multiplier, 1000),
-			(overlay_set_size, "$obj_stamina_bar", pos1),
+			(overlay_set_size, ":obj_bar", pos1),
 		(try_end),
 	]),
 	

@@ -2423,7 +2423,8 @@ scripts = [
 			(try_begin),
 				(call_script, "script_cf_ce_troop_has_ability", "$cms_role_storekeeper", BONUS_QUICK_STUDY),
 				(store_attribute_level, ":quick_study_bonus", "$cms_role_storekeeper", ca_intelligence),
-				(val_div, ":quick_study_bonus", 2),
+				(val_sub, ":quick_study_bonus", 8),
+				(val_max, ":quick_study_bonus", 0),
 				(store_random_in_range, ":qs_roll", 0, 100),
 				(lt, ":qs_roll", ":quick_study_bonus"),
 				(val_add, ":xp_gain", 1),
@@ -2741,12 +2742,13 @@ scripts = [
 			(try_begin),
 				(call_script, "script_cf_ce_troop_has_ability", "$cms_role_quartermaster", BONUS_QUICK_STUDY),
 				(store_attribute_level, ":quick_study_bonus", "$cms_role_quartermaster", ca_intelligence),
-				(val_div, ":quick_study_bonus", 2),
+				(val_sub, ":quick_study_bonus", 8),
+				(val_max, ":quick_study_bonus", 0),
 				(store_mul, ":quick_study_xp", ":gained_gold", ":quick_study_bonus"),
 				(val_div, ":quick_study_xp", 100),
 				(assign, reg11, ":quick_study_xp"),
 				(display_message, "@{s21} earns an additional {reg11} experience. (Quick Study)"),
-				(add_xp_to_troop, ":quick_study_xp", "$cms_role_quartermaster"), # Quick study companions gain 1% per 2 INT extra as experience.
+				(add_xp_to_troop, ":quick_study_xp", "$cms_role_quartermaster"), # Quick study companions gain 1% per 1 INT above 8 as experience.
 			(try_end),
 			
 			## DISPLAY WHAT COULDN'T BE SOLD.
@@ -2866,12 +2868,13 @@ scripts = [
 			(try_begin),
 				(call_script, "script_cf_ce_troop_has_ability", "$cms_role_jailer", BONUS_QUICK_STUDY),
 				(store_attribute_level, ":quick_study_bonus", "$cms_role_jailer", ca_intelligence),
-				(val_div, ":quick_study_bonus", 2),
+				(val_sub, ":quick_study_bonus", 8),
+				(val_max, ":quick_study_bonus", 0),
 				(store_mul, ":quick_study_xp", ":cash", ":quick_study_bonus"),
 				(val_div, ":quick_study_xp", 100),
 				(assign, reg11, ":quick_study_xp"),
 				(display_message, "@{s21} earns an additional {reg11} experience. (Quick Study)"),
-				(add_xp_to_troop, ":quick_study_xp", "$cms_role_jailer"), # Quick study companions gain 1% per 2 INT extra as experience.
+				(add_xp_to_troop, ":quick_study_xp", "$cms_role_jailer"), # Quick study companions gain 1% per 1 INT above 8 as experience.
 			(try_end),
 		(else_try),
 			### JAILER: STORAGE OF PRISONERS ###

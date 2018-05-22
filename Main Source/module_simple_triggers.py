@@ -2491,94 +2491,10 @@ simple_triggers = [
   (14,
    [
     (eq, "$g_player_is_captive", 0),
-	## WINDYPLAINS+ ## - CMS Calculation for Eating Troops, Food Available & Remaining Days
-    # (party_get_num_companion_stacks, ":num_stacks","p_main_party"),
-    # (assign, ":num_men", 0),
-	# ## WINDYPLAINS+ ## - Troop Effect (BONUS_HUNTER) - Reduce the amount of food needed.
-	# (assign, ":hunting_chance", 0),
-	# (assign, ":total_hunters", 0),
-    # (try_for_range, ":i_stack", 0, ":num_stacks"),
-		# (party_stack_get_size, ":stack_size","p_main_party",":i_stack"),
-		# (val_add, ":num_men", ":stack_size"),
-		# #
-		# (party_stack_get_troop_id, ":stack_troop", "p_main_party", ":i_stack"),
-		# (call_script, "script_cf_ce_troop_has_ability", ":stack_troop", BONUS_HUNTER),
-		# (val_add, ":total_hunters", 1),
-		# (try_begin),
-			# (this_or_next|is_between, ":stack_troop", companions_begin, companions_end),
-			# (eq, ":stack_troop", "trp_player"),
-			# (store_skill_level, ":tracking", "skl_tracking", ":stack_troop"),
-			# (val_max, ":tracking", 1),
-			# (val_mul, ":tracking", 3),
-			# (val_add, ":hunting_chance", ":tracking"),
-		# (else_try),
-			# (val_add, ":hunting_chance", ":stack_size"),
-		# (try_end),
-    # (try_end),
-	
-	# # Hunting Effect
-	# (try_begin),
-		# (ge, ":total_hunters", 1),
-		# (party_get_current_terrain, ":terrain", "p_main_party"),
-		# (try_begin),
-			# ## Abundant Hunting
-			# (eq, ":terrain", rt_water),
-			# (eq, ":terrain", rt_plain),
-			# (eq, ":terrain", rt_bridge),
-			# (eq, ":terrain", rt_river),
-			# (eq, ":terrain", rt_forest),
-			# (val_mul, ":hunting_chance", 3),
-			# (val_add, ":hunting_chance", 20),
-			# (val_clamp, ":hunting_chance", 0, 100),
-			# (str_store_string, s31, "@an abundant"),
-		# (else_try),
-			# ## Sparse Hunting
-			# (eq, ":terrain", rt_mountain),
-			# (eq, ":terrain", rt_snow),
-			# (eq, ":terrain", rt_desert),
-			# (eq, ":terrain", rt_desert_forest),
-			# (val_mul, ":hunting_chance", 1),
-			# (val_clamp, ":hunting_chance", 0, 100),
-			# (str_store_string, s31, "@a sparse"),
-		# (else_try),
-			# ## Default = Moderate Hunting
-			# (val_mul, ":hunting_chance", 2),
-			# (val_add, ":hunting_chance", 10),
-			# (val_clamp, ":hunting_chance", 0, 100),
-			# (str_store_string, s31, "@a moderate"),
-		# (try_end),
-		# (store_random_in_range, ":hunt_attempt", 0, 100),
-		# (store_mul, ":hunting_bonus", ":total_hunters", 6),
-		
-		# ## DIAGNOSTIC+ ##
-		# # (assign, reg31, ":hunting_chance"),
-		# # (assign, reg32, ":total_hunters"),
-		# # (assign, reg33, ":hunting_bonus"),
-		# # (assign, reg34, ":num_men"),
-		# # (display_message, "@DEBUG (Abilities): {reg32} Hunters in {s31} area had a {reg31}% chance of reducing people to feed by {reg33}. ({reg34} total)", gpu_debug),
-		# ## DIAGNOSTIC- ##
-		
-		# (lt, ":hunt_attempt", ":hunting_chance"),
-		# (val_sub, ":num_men", ":hunting_bonus"),
-		# (val_max, ":num_men", 1),
-	# (try_end),
-	# ## WINDYPLAINS- ##
-	# ## WINDYPLAINS+ ## - Troop Effect (BONUS_CHEF) - Alter how many troops X amount of food can feed.
-	# (try_begin),
-		# (call_script, "script_cf_ce_troop_has_ability", "$cms_role_storekeeper", BONUS_CHEF),
-		# (assign, ":chef_effect", 29),
-	# (else_try),
-		# (assign, ":chef_effect", 33),
-	# (try_end),
-	# (val_mul, ":num_men", ":chef_effect"),
-	# (val_div, ":num_men", 100),
-    # # (val_div, ":num_men", 3),
-	# ## WINDYPLAINS- ##
-    # (try_begin),
-      # (eq, ":num_men", 0),
-      # (val_add, ":num_men", 1),
-    # (try_end),
-    
+	## WINDYPLAINS+ ## - Oathbound - Troops do not consume food.
+	(neq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+	## WINDYPLAINS- ##
+	## WINDYPLAINS+ ## - Consolidated food consuming script.
 	(call_script, "script_calculate_days_of_food_remaining"), # reg0 (# of men), reg1 (food available), reg2 (days left)
 	(assign, ":num_men", reg0),
 	## WINDYPLAINS- ##

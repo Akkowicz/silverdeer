@@ -44,6 +44,16 @@ mod_options = [
 		# (call_script, "script_reset_garrisons"),
 	  # ],),
 	
+	# ("enable_oathbound_debug", xgm_ov_checkbox, [(ge, BETA_TESTING_MODE, 1),], "Enable Oathbound Debugging:", 0,
+		# "When checked, this will turn on debugging messages related to the Oathbound system.", 0,
+		# [(assign, reg1, "$oathbound_debugging"),],
+		# [(assign, "$oathbound_debugging", reg1),],),
+	
+	("enable_oathbound_fief_pause", xgm_ov_checkbox, [], "Pause at Fiefs:", 0,
+		"When checked, this will trigger the Oathbound interface to activate whenever your contracted party visits a fief.", 0,
+		[(assign, reg1, "$oathbound_pause_at_fiefs"),],
+		[(assign, "$oathbound_pause_at_fiefs", reg1),],),
+	
 	("enable_tutorials", xgm_ov_checkbox, [], "Enable Tutorial Quests:", 0,
 		"When checked, this will allow tutorial quests to trigger if the conditions are right to explain how to use the mod's systems.", 0,
 		[(assign, reg1, "$enable_tutorials"),],
@@ -338,6 +348,11 @@ mod_options = [
 	  [(assign, reg1, "$enable_sprinting"),],
 	  [(assign, "$enable_sprinting", reg1),],),
 	
+	("toggle_silence_sprinters", xgm_ov_checkbox, [], "Silence Sprinting Shouts:", 0,
+	  "When enabled, AI troops will no longer yell a war cry when beginning to sprint in combat.", 0,
+	  [(assign, reg1, "$option_silent_sprinting"),],
+	  [(assign, "$option_silent_sprinting", reg1),],),
+	  
 	("fallen_riders", xgm_ov_checkbox, [], "Riders Damaged When Unhorsed:", 0,
 		"When checked, this will cause any mounted rider (player or AI) to receive damage when their mount is taken out from under them.  Damage is increased based upon the speed the mount was moving and the total weight of the rider and reduced by the rider's riding skill.^^Note: Turning this off will help CPU performance.", 0,
 		[(assign, reg1, "$enable_fallen_riders"),],

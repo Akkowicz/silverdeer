@@ -124,15 +124,15 @@ particle_systems = [
  #    0.5                        #rotation damping
  #   ),
      ("game_hoof_dust", psf_billboard_3d|psf_randomize_size|psf_randomize_rotation|psf_2d_turbulance, "prt_mesh_dust_1",#prt_mesh_dust_1
-     6, 3.0,  10, 0.02, 12.0, 39.0, #num_particles, life, damping, gravity_strength, turbulance_size, turbulance_strength
+     5, 2.0,  10, 0.05, 10.0, 39.0, #num_particles, life, damping, gravity_strength, turbulance_size, turbulance_strength
      (0.2, 0.5), (1, 0.0),        #alpha keys
      (0, 1), (1, 1),        #red keys
      (0, 0.9),(1, 0.9),         #green keys
      (0, 0.78),(1, 0.78),         #blue keys
-     (0.0, 3.0),   (1.0, 12),   #scale keys
-     (0.6, 0.8, 1.0),           #emit box size
+     (0.0, 2.0),   (1.0, 3.5),   #scale keys
+     (0.2, 0.3, 0.2),           #emit box size
      (0, 0, 3.9),                 #emit velocity
-     0.8,                         #emit dir randomness
+     0.5,                         #emit dir randomness
      130,                       #rotation speed
      0.5                        #rotation damping
     ),

@@ -672,6 +672,12 @@ presentations = [
 		(try_begin), ####### COMBO BUTTON - ITEM TYPE SELECTOR #######
 			(eq, ":object", "$g_presentation_obj_1"),
 			(assign, "$temp", ":value"),
+			## Reset our selected item modifier back to plain between item types.
+			(troop_set_slot, CCI_OBJECTS, cci_val_selected_imod, imod_plain),
+			(try_for_range, ":slot_no", cci_val_checkbox_modifiers_begin, cci_val_checkbox_modifiers_end),
+				(troop_set_slot, CCI_OBJECTS, ":slot_no", 0),
+			(try_end),
+			(troop_set_slot, CCI_OBJECTS, cci_val_checkbox_modifiers_begin, 1),
 			(start_presentation, "prsnt_commission_requests"),
 
 		(else_try),  ####### BUTTON - DONE #######

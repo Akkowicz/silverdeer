@@ -225,13 +225,13 @@ combat_enhancement_triggers = [
 				(val_div, ":ironflesh_bonus", 2),
 			(try_end),
 			(val_add, ":bonus_abilities", ":ironflesh_bonus"),
-			# (try_begin),  ### DIAGNOSTIC+ ###
-				# (ge, DEBUG_TROOP_ABILITIES, 1),
-				# (call_script, "script_ce_store_troop_ability_string_to_s31", ":troop_killer", BONUS_HARDY),
-				# (str_store_troop_name, s32, ":troop_killer"),
-				# (assign, reg31, ":ironflesh_bonus"),
-				# (display_message, "@DEBUG: {s32} has the '{s31}' bonus so gains +{reg31}% to health regen.", gpu_green),
-			# (try_end), ### DIAGNOSTIC- ###
+			(try_begin),  ### DIAGNOSTIC+ ###
+				(ge, DEBUG_TROOP_ABILITIES, 2),
+				(call_script, "script_ce_store_troop_ability_string_to_s31", ":troop_killer", BONUS_HARDY),
+				(str_store_troop_name, s32, ":troop_killer"),
+				(assign, reg31, ":ironflesh_bonus"),
+				(display_message, "@DEBUG: {s32} has the '{s31}' bonus so gains +{reg31}% to health regen.", gpu_green),
+			(try_end), ### DIAGNOSTIC- ###
 		(try_end),
 		
 		## Nearby Troop Ability: BONUS_COMMANDING_PRESENCE
@@ -254,14 +254,14 @@ combat_enhancement_triggers = [
 				(val_div, ":presence_bonus", 2),
 				(val_add, ":presence_bonus", 2),
 				(val_add, ":bonus_abilities", ":presence_bonus"),
-				# (try_begin),  ### DIAGNOSTIC+ ###
-					# (ge, DEBUG_TROOP_ABILITIES, 1),
-					# (call_script, "script_ce_store_troop_ability_string_to_s31", ":troop_killer", BONUS_COMMANDING_PRESENCE),
-					# (str_store_troop_name, s33, ":nearby_troop"),
-					# (str_store_troop_name, s32, ":troop_killer"),
-					# (assign, reg31, ":presence_bonus"),
-					# (display_message, "@DEBUG: {s33} has '{s31}' and raises {s32}'s health regen by {reg31}.", gpu_green),
-				# (try_end),  ### DIAGNOSTIC- ###
+				(try_begin),  ### DIAGNOSTIC+ ###
+					(ge, DEBUG_TROOP_ABILITIES, 2),
+					(call_script, "script_ce_store_troop_ability_string_to_s31", ":troop_killer", BONUS_COMMANDING_PRESENCE),
+					(str_store_troop_name, s33, ":nearby_troop"),
+					(str_store_troop_name, s32, ":troop_killer"),
+					(assign, reg31, ":presence_bonus"),
+					(display_message, "@DEBUG: {s33} has '{s31}' and raises {s32}'s health regen by {reg31}.", gpu_green),
+				(try_end),  ### DIAGNOSTIC- ###
 				(break_loop),
 			(try_end),
 			
@@ -289,7 +289,7 @@ combat_enhancement_triggers = [
 	  
 		# Displays debug messages if turned on.
 		(try_begin), 
-			(eq, DEBUG_COMBAT, 1),
+			# (eq, DEBUG_COMBAT, 1),
 			(this_or_next|eq, ":troop_killer", "trp_player"),
 			(eq, DEBUG_COMBAT, 2),
 			(eq, ":disable_debug", 0),
@@ -307,8 +307,16 @@ combat_enhancement_triggers = [
 		# Regenerates the given health amount.
 		(ge, ":health_regeneration", 1),
 		(store_agent_hit_points, ":current_health", ":agent_killer", 0),
+		(store_agent_hit_points, reg31, ":agent_killer", 1),
 		(val_add, ":current_health", ":health_regeneration"),
 		(agent_set_hit_points, ":agent_killer", ":current_health", 0),
+		(store_agent_hit_points, reg32, ":agent_killer", 1),
+		(try_begin),
+			# (ge, DEBUG_COMBAT, 1),
+			(eq, ":troop_killer", "trp_player"),
+			(str_store_troop_name, s31, ":troop_killer"),
+			(display_message, "@DEBUG (Health Regen): {s31}'s health improved from {reg31} to {reg32}.", gpu_debug),
+		(try_end),
     ]),
 
 ## TRIGGER: BONUS EXPERIENCE FOR INTELLIGENCE
@@ -640,12 +648,15 @@ combat_enhancement_triggers = [
 			(agent_slot_eq, ":agent_no", slot_agent_sprint_cooldown, 0),  # Sprint can be activated repeatedly now, but endless war cries are annoying.
 			(agent_set_slot, ":agent_no", slot_agent_sprint_cooldown, 1), # Done to prevent this block from repeating.
 			(display_message, "@You have started sprinting{s31}.", gpu_debug),
-			(troop_get_type, ":gender", ":troop_no"),
 			(try_begin),
-				(eq, ":gender", 0),
-				(agent_play_sound, ":agent_no", "snd_man_warcry"),
-			(else_try),
-				(agent_play_sound, ":agent_no", "snd_woman_yell"),
+				(neq, "$option_silent_sprinting", 1),
+				(troop_get_type, ":gender", ":troop_no"),
+				(try_begin),
+					(eq, ":gender", 0),
+					(agent_play_sound, ":agent_no", "snd_man_warcry"),
+				(else_try),
+					(agent_play_sound, ":agent_no", "snd_woman_yell"),
+				(try_end),
 			(try_end),
 			(assign, reg63, 666), # Done to prevent seeing the normal speed message upon mission loading.
 		(else_try),
@@ -850,10 +861,13 @@ combat_enhancement_triggers = [
 				(agent_set_slot, ":agent_no", slot_agent_sprint_cooldown, 1), # Done to prevent this block from repeating.
 				(troop_get_type, ":gender", ":troop_no"),
 				(try_begin),
-					(eq, ":gender", 0),
-					(agent_play_sound, ":agent_no", "snd_man_warcry"),
-				(else_try),
-					(agent_play_sound, ":agent_no", "snd_woman_yell"),
+					(neq, "$option_silent_sprinting", 1),
+					(try_begin),
+						(eq, ":gender", 0),
+						(agent_play_sound, ":agent_no", "snd_man_warcry"),
+					(else_try),
+						(agent_play_sound, ":agent_no", "snd_woman_yell"),
+					(try_end),
 				(try_end),
 				(try_begin),
 					(ge, DEBUG_SPRINTING, 1),
@@ -963,7 +977,12 @@ combat_enhancement_triggers = [
 
 ## TRIGGER: BODYSLIDING (1 OF 2)
 (ti_before_mission_start, 0, 0, 
-	[],
+	[
+		(store_cur_mission_template_no, ":mission_no"), # WSE
+		(neq, ":mission_no", "mt_arena_melee_fight"), # Arena fights to prevent the map from showing up there or while talking to the arena master.
+		(neq, ":mission_no", "mt_tpe_tournament_native_gear"), # Tournament fights should be excluded.
+		(neq, ":mission_no", "mt_tpe_tournament_standard"), # Tournament fights should be excluded.
+	],
 	[
 		#reset global variables
 		(assign, "$player_has_bodyslided", 0), #variable for player party after party rebalancing
@@ -983,6 +1002,10 @@ combat_enhancement_triggers = [
 		(neq, "$enable_bodysliding", 0),
 		(get_player_agent_no,":agent"),
 		(neg|agent_is_alive, ":agent"),
+		(store_cur_mission_template_no, ":mission_no"), # WSE
+		(neq, ":mission_no", "mt_arena_melee_fight"), # Arena fights to prevent the map from showing up there or while talking to the arena master.
+		(neq, ":mission_no", "mt_tpe_tournament_native_gear"), # Tournament fights should be excluded.
+		(neq, ":mission_no", "mt_tpe_tournament_standard"), # Tournament fights should be excluded.
 	],
 	[
 		(set_fixed_point_multiplier, 100),
@@ -1036,6 +1059,37 @@ combat_enhancement_triggers = [
 				(agent_get_troop_id, ":troop_no", ":agent_no"),
 				(agent_get_party_id, ":agent_party",":agent_no"),
 				(eq, ":agent_party", "p_main_party"),
+				# Check for distance.
+				(agent_get_position, pos2, ":agent_no"),
+				(get_distance_between_positions_in_meters, ":distance", pos1, pos2),
+				(lt, ":distance", ":closest_distance"),
+				(assign, ":bodyslide_target", ":troop_no"),
+				(assign, ":bodyslide_agent", ":agent_no"),
+				(assign, ":closest_distance", ":distance"),
+				
+				### DIAGNOSTIC+ ###
+				# (assign, reg31, ":closest_distance"),
+				(str_store_troop_name, s31, ":bodyslide_target"),
+				(display_message, "@You have assumed control of {s31} to continue the battle.", gpu_debug),
+				### DIAGNOSTIC- ###
+			(try_end),
+		(try_end),
+		
+		## IF NO TEAM MEMBER AVAILABLE, IF OATHBOUND THEN USE ALLY.
+		(try_begin),
+			(eq, ":bodyslide_target", -1),
+			(eq, "$enable_bodysliding", BODYSLIDING_ALL_TROOPS),
+			(eq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+			(try_for_agents, ":agent_no"),
+				(eq, ":bodyslide_target", -1),
+				(agent_is_human, ":agent_no"),
+				(agent_is_alive, ":agent_no"),
+				(agent_is_ally, ":agent_no"),
+				# (agent_get_team, ":agent_team", ":agent_no"),
+				# (eq, ":agent_team", ":player_team"),
+				(agent_get_troop_id, ":troop_no", ":agent_no"),
+				# (agent_get_party_id, ":agent_party",":agent_no"),
+				# (eq, ":agent_party", "p_main_party"),
 				# Check for distance.
 				(agent_get_position, pos2, ":agent_no"),
 				(get_distance_between_positions_in_meters, ":distance", pos1, pos2),
@@ -2091,6 +2145,13 @@ combat_enhancement_triggers = [
 		(store_trigger_param_2, ":agent_attacker"),
 		(store_trigger_param_3, ":initial_damage"),
 		
+		# Filter Inappropriate Missions
+		(store_cur_mission_template_no, ":mission_no"), # WSE
+		(neq, ":mission_no", "mt_arena_melee_fight"), # Arena fights to prevent the map from showing up there or while talking to the arena master.
+		(neq, ":mission_no", "mt_tpe_tournament_native_gear"), # Tournament fights should be excluded.
+		(neq, ":mission_no", "mt_tpe_tournament_standard"), # Tournament fights should be excluded.
+		(neq, ":mission_no", "mt_village_training"), # Training peasants should be excluded.
+		
 		(ge, ":initial_damage", 1), # You have to actually hurt them.
 		(agent_is_human, ":agent_victim"),
 		(agent_is_alive, ":agent_victim"),
@@ -2098,13 +2159,6 @@ combat_enhancement_triggers = [
 		(agent_get_troop_id, ":troop_attacker", ":agent_attacker"),
 		(agent_get_troop_id, ":troop_victim", ":agent_victim"),
 		(call_script, "script_cf_ce_troop_has_ability", ":troop_attacker", BONUS_POISONED_WEAPONS),
-		
-		# Filter Inappropriate Missions
-		(store_cur_mission_template_no, ":mission_no"), # WSE
-		(neq, ":mission_no", "mt_arena_melee_fight"), # Arena fights to prevent the map from showing up there or while talking to the arena master.
-		(neq, ":mission_no", "mt_tpe_tournament_native_gear"), # Tournament fights should be excluded.
-		(neq, ":mission_no", "mt_tpe_tournament_standard"), # Tournament fights should be excluded.
-		(neq, ":mission_no", "mt_village_training"), # Training peasants should be excluded.
 		
 		# Player notification of poisoning someone else.
 		(try_begin),

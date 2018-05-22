@@ -43,7 +43,19 @@ game_menus = [
 			(try_end),
 			],
 		[
-			("continue",[], "Leave...",	[(jump_to_menu, "mnu_camp"),]),
+			("continue",[], "Leave...",	
+				[
+					(try_begin),
+						(eq, "$cms_return_location", CMS_RETURN_CAMP),
+						(jump_to_menu, "mnu_camp"),
+					(else_try),
+						(eq, "$cms_return_location", CMS_RETURN_OATHBOUND),
+						(assign, "$oathbound_mode", OATH_MODE_CONTRACT_INFO),
+						(start_presentation, "prsnt_oathbound_contract_info"),
+					(else_try),
+						(jump_to_menu, "mnu_camp"),
+					(try_end),
+				]),
 			
 		]),
 		
@@ -159,7 +171,19 @@ game_menus = [
 					(jump_to_menu, "mnu_export_import_npcs"),
 				]),
 			
-			("continue", [], "Continue...",	[(jump_to_menu, "mnu_camp"),]),
+			("continue", [], "Continue...",	
+				[
+					(try_begin),
+						(eq, "$cms_return_location", CMS_RETURN_CAMP),
+						(jump_to_menu, "mnu_camp"),
+					(else_try),
+						(eq, "$cms_return_location", CMS_RETURN_OATHBOUND),
+						(assign, "$oathbound_mode", OATH_MODE_CONTRACT_INFO),
+						(start_presentation, "prsnt_oathbound_contract_info"),
+					(else_try),
+						(jump_to_menu, "mnu_camp"),
+					(try_end),
+				]),
 		]),
 
 ###########################################################################################################################
@@ -646,6 +670,7 @@ camp_addon = [
 	("camp_equipment_settings",[],"Companion Management", 
 		[
 			(assign, "$cms_display", CMS_MODE_MAIN),
+			(assign, "$cms_return_location", CMS_RETURN_CAMP),
 			(jump_to_menu, "mnu_companion_settings"),
 		]),
 	

@@ -41,14 +41,18 @@ presentations = [
 		(call_script, "script_gpu_container_heading", ":x_left", ":y_bottom", ":x_width", ":y_width", grt4_obj_container_1),
 		
 			(assign, ":pos_y", 475),
-			(assign, ":y_line_step", 20),
-			(assign, ":x_desc", 110),
-			# (assign, ":y_option_step", 70),
 			
-			## OBJ - TEXT - TEXT LINE
-			(str_store_string, s21, "@The cost of hiring troops for your garrison at this location "),
-			(val_sub, ":pos_y", ":y_line_step"),
-			(call_script, "script_gpu_create_text_label", "str_hub_s21", ":x_desc", ":pos_y", 0, gpu_left),
+			## OBJ - TEXT - Setup Emblem Description
+			(str_clear, s1),
+			(str_store_string, s1, "@{s1}Emblems are tokens awarded within the mod for accomplishing special tasks and "),
+			(str_store_string, s1, "@{s1}allow you to gain unique bonuses in return.  There are several ways that these "),
+			(str_store_string, s1, "@{s1}emblems may be awarded:"),
+			(call_script, "script_oath_word_wrap_text", 75), # Input s1, Returns s1 (wrapped text), reg1 (# lines)
+			(str_store_string, s1, "@{s1}^^1.) Winning a tournament by greater than 10 points."),
+			(str_store_string, s1, "@{s1}^2.) Completing mod specific quests.  This is altered by your difficulty."),
+			(str_store_string, s1, "@{s1}^3.) Rank promotions while serving under the Oathbound system."),
+			(str_store_string, s21, s1),
+			(call_script, "script_gpu_create_text_label", "str_hub_s21", 5, ":pos_y", 0, gpu_left),
 			(call_script, "script_gpu_resize_object", 0, 75),
 			
 		(set_container_overlay, -1), ## CONTAINER- - EMBLEM OPTIONS

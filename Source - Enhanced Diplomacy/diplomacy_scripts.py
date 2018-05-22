@@ -198,10 +198,17 @@ scripts = [
 			(try_end),
 			
 			(try_begin),
+				## TROOP ABILITY: BONUS_MULTICULTURAL
+				(call_script, "script_cf_ce_troop_has_ability", "trp_player", BONUS_MULTICULTURAL), # combat_scripts.py - ability constants in combat_constants.py
+				(val_sub, ":treat_as_type", 1),
+				(val_max, ":treat_as_type", 2),
+			(try_end),
+			
+			(try_begin),
 				## TROOP ABILITY: BONUS_DEDICATED
 				(call_script, "script_cf_ce_troop_has_ability", ":troop_no", BONUS_DEDICATED), # combat_scripts.py - ability constants in combat_constants.py
 				(val_sub, ":treat_as_type", 1),
-				(val_max, ":treat_as_type", 1),
+				(val_max, ":treat_as_type", 2),
 			(try_end),
 			
 			(try_begin),
@@ -1753,50 +1760,6 @@ scripts = [
 		(try_end),
 	]),
 	
-# # script_diplomacy_describe_troop_to_s2
-# # PURPOSE: Create a small descriptive line for a troop to show what types of attacks it has.
-# ("diplomacy_describe_troop_to_s2",
-	# [
-		# (store_script_param_1, ":troop_no"),
-		
-		# (str_clear, s2),
-		# (try_begin),
-			# (troop_is_guarantee_ranged, ":troop_no"),
-			# (assign, ":ranged", 1),
-		# (else_try),
-			# (assign, ":ranged", 0),
-		# (try_end),
-		# (try_begin),
-			# (troop_is_guarantee_horse, ":troop_no"),
-			# (assign, ":mounted", 1),
-		# (else_try),
-			# (troop_is_mounted, ":troop_no"),
-			# (assign, ":mounted", 2),
-		# (else_try),
-			# (assign, ":mounted", 0),
-		# (try_end),
-		# (try_begin),
-			# (eq, ":mounted", 1),
-			# (eq, ":ranged", 1),
-			# (str_store_string, s2, "@Mounted & Ranged Attack"),
-		# (else_try),
-			# (eq, ":mounted", 2),
-			# (eq, ":ranged", 1),
-			# (str_store_string, s2, "@Possibly Mounted & Ranged Attack"),
-		# (else_try),
-			# (eq, ":mounted", 1),
-			# (str_store_string, s2, "@Mounted"),
-		# (else_try),
-			# (eq, ":mounted", 2),
-			# (str_store_string, s2, "@Possibly Mounted"),
-		# (else_try),
-			# (eq, ":ranged", 1),
-			# (str_store_string, s2, "@Ranged Attack"),
-		# (else_try),
-			# (str_store_string, s2, "@Melee on Foot"),
-		# (try_end),
-	# ]),
-	
 # script_diplomacy_determine_troop_tier
 # PURPOSE: For a given troop ID determine how many tiers up in the upgrade system it is.
 ("diplomacy_determine_troop_tier",
@@ -1804,125 +1767,7 @@ scripts = [
 		(store_script_param, ":troop_no", 1),
 		
 		(troop_get_slot, reg1, ":troop_no", slot_troop_tier),
-		
-		# (assign, ":jumps", 1),
-		# (assign, ":focus_troop", ":troop_no"),
-		# (try_for_range, ":unused", 0, 10),
-			# # To save on loop sizes we're going to take a sampling of the troop list and see if our upgrade troops are nearby first.
-			# (store_sub, ":lower_limit", ":focus_troop", 20),
-			# (store_add, ":upper_limit", ":focus_troop", 20),
-			# (val_clamp, ":lower_limit", 1, "trp_end_of_troops"),
-			# (val_clamp, ":upper_limit", 1, "trp_end_of_troops"),
-			
-			# # Cycle through our sampling for someone that upgrades to this troop type.
-			# (assign, ":found_a_match", 0),
-			# (try_for_range, ":sample_troop", ":lower_limit", ":upper_limit"),
-				# (troop_get_upgrade_troop, ":path_1", ":sample_troop", 0),
-				# (troop_get_upgrade_troop, ":path_2", ":sample_troop", 1),
-				# # Check if this troop upgrades into the one we want.  Most troops should fail this set of checks.
-				# (this_or_next|eq, ":path_1", ":focus_troop"),
-				# (eq, ":path_2", ":focus_troop"),
-				# # Make sure if this is a tier 1 faction troop we don't count bandits that lead to it.
-				# (assign, ":pass", 1),
-				# (try_for_range, ":kingdom_no", kingdoms_begin, kingdoms_end),
-					# (faction_get_slot, ":culture_no", ":kingdom_no"),
-					# (faction_slot_eq, ":culture_no", slot_faction_tier_1_troop, ":focus_troop"),
-					# (assign, ":pass", 0),
-				# (try_end),
-				# (eq, ":pass", 1),
-				# # This is a valid troop so let's shift our focus to it.
-				# (assign, ":focus_troop", ":sample_troop"),
-				# (val_add, ":jumps", 1),
-				# (assign, ":found_a_match", 1),
-				# (break_loop),
-			# (try_end),
-			
-			# # In the event that we failed to find a match in our smaller loop then we'll have to try a larger one.
-			# (eq, ":found_a_match", 0),
-			# (try_for_range, ":sample_troop", 1, "trp_end_of_troops"),
-				# (troop_get_upgrade_troop, ":path_1", ":sample_troop", 0),
-				# (troop_get_upgrade_troop, ":path_2", ":sample_troop", 1),
-				# # Check if this troop upgrades into the one we want.  Most troops should fail this set of checks.
-				# (this_or_next|eq, ":path_1", ":focus_troop"),
-				# (eq, ":path_2", ":focus_troop"),
-				# # Make sure if this is a tier 1 faction troop we don't count bandits that lead to it.
-				# (assign, ":pass", 1),
-				# (try_for_range, ":kingdom_no", kingdoms_begin, kingdoms_end),
-					# (faction_get_slot, ":culture_no", ":kingdom_no", slot_faction_culture),
-					# (faction_slot_eq, ":culture_no", slot_faction_tier_1_troop, ":focus_troop"),
-					# (assign, ":pass", 0),
-				# (try_end),
-				# (eq, ":pass", 1),
-				# # This is a valid troop so let's shift our focus to it.
-				# (assign, ":focus_troop", ":sample_troop"),
-				# (val_add, ":jumps", 1),
-				# (assign, ":found_a_match", 1),
-				# (break_loop),
-			# (try_end),
-			
-			# # If we still haven't found a match then it is time to stop looking for this troop's starting point as this troop is a tier 1.
-			# (eq, ":found_a_match", 0),
-			# (break_loop),
-		# (try_end),
-		
-		# (assign, reg1, ":jumps"),
 	]),
-	
-# # script_diplomacy_initialize_troop_upgrade_options
-# # PURPOSE: Sets the initial training options for a given troop.  This is intended to be used at game start to setup every troop in the game's options or to reboot an individual troop's options.
-# ("diplomacy_initialize_troop_upgrade_options",
-	# [
-		# (store_script_param, ":troop_no", 1),
-		
-		# # Determine how many upgrade paths this troop has available.
-		# (troop_get_upgrade_troop, ":path_1", ":troop_no", 0),
-		# (troop_get_upgrade_troop, ":path_2", ":troop_no", 1),
-		# (assign, ":count", 0),
-		# (try_begin),
-			# (neq, ":path_1", 0),
-			# (val_add, ":count", 1),
-		# (try_end),
-		# (try_begin),
-			# (neq, ":path_2", 0),
-			# (val_add, ":count", 1),
-		# (try_end),
-		
-		# # Determine the split each path should get based on the number of paths.
-		# (try_begin),
-			# (ge, ":count", 3),
-			# (assign, ":chance", 0),
-			# (str_store_troop_name, s31, ":troop_no"),
-			# (display_message, "@ERROR - Troop {s31} has more than two upgrade paths."),
-		# (else_try),
-			# (eq, ":count", 2),
-			# (assign, ":chance", 50),
-		# (else_try),
-			# (eq, ":count", 1),
-			# (assign, ":chance", 100),
-		# (else_try),
-			# (eq, ":count", 0),
-			# (assign, ":chance", 0),
-		# (else_try),
-			# (assign, ":chance", 100), # Should not ever be possible give the above options, but just in case.
-		# (try_end),
-		
-		# # Now assign each upgrade path it's given chance.
-		# (try_begin),
-			# (neq, ":path_1", 0),
-			# (troop_set_slot, ":troop_no", slot_troop_upgrade_chance_1, ":chance"),
-		# (try_end),
-		# (try_begin),
-			# (neq, ":path_2", 0),
-			# (troop_set_slot, ":troop_no", slot_troop_upgrade_chance_2, ":chance"),
-		# (try_end),
-		
-		# (try_begin),
-			# (ge, DEBUG_DIPLOMACY, 2),
-			# (assign, reg31, ":chance"),
-			# (str_store_troop_name, s31, ":troop_no"),
-			# (display_message, "@DEBUG (diplomacy): Upgrade chances for {s31} has been reset to {reg31}%.", gpu_debug),
-		# (try_end),
-	# ]),
 	
 # script_diplomacy_advisors_flee_the_castle
 # If a castle that an advisor is stationed at is lost then the advisor is setup to rejoin the companions that move around the map.

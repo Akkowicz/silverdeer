@@ -20,12 +20,12 @@ game_menus = [
 	# PEP_MODE_MISC                        = 3   # Instantly finish a book
 	# PEP_MODE_DEBUGGING                   = 4   # Add or remove emblems.
 	
-	# mnu_garrison_switch_modes
+	# mnu_player_emblem_switch_modes
 	("player_emblem_switch_modes", mnf_scale_picture|mnf_disable_all_keys,
 		"I shouldn't see this.  This should automatically be hidden by a new presentation.",
 		"none",
 		[
-			# Wipe clean GRT_OBJECTS
+			# Wipe clean EMBLEM_OBJECTS
 			(try_for_range, ":slot", 0, 400),
 				(troop_set_slot, EMBLEM_OBJECTS, ":slot", 0),
 			(try_end),

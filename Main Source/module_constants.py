@@ -1870,8 +1870,8 @@ ACHIEVEMENT_TALK_OF_THE_TOWN = 79,
 ACHIEVEMENT_LADY_OF_THE_LAKE = 80,
 
 # TPE general constants
-mod_version   = 26
-patch_version = 7
+mod_version   = 27
+patch_version = 1
 
 #### DEBUGGING SYSTEM ####
 DEBUG_DIFFICULTY = 0
@@ -1956,8 +1956,8 @@ bandit_upgrades_begin = "trp_mountain_bandit_1"
 bandit_upgrades_end   = "trp_manhunter"
 
 ### FACTION TROOP DEFINITIONS
-player_troops_begin   = "trp_player_tier_1"
-player_troops_end     = "trp_player_placeholder_1"  # "trp_player_placeholder_1"
+player_troops_begin   = "trp_r_mercenary_caravan_guard" #"trp_player_tier_1"
+player_troops_end     = "trp_r_mercenary_end_troop"  #"trp_player_placeholder_1"  # "trp_player_placeholder_1"
 swadia_troops_begin   = "trp_r_swadian_hunter"
 swadia_troops_end     = "trp_swadia_uniques_end"  # "trp_swadia_troops_end"
 vaegir_troops_begin   = "trp_r_vaegir_militia"

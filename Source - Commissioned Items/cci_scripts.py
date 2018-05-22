@@ -511,6 +511,9 @@ scripts = [
 			### AMMUNITION FILTER ###
 			(eq, ":item_group", CCI_GROUP_AMMUNITION), # Ammunition
 			# Valid IMODs.
+			(this_or_next|eq, ":imod", imod_masterwork),
+			(this_or_next|eq, ":imod", imod_balanced),
+			(this_or_next|eq, ":imod", imod_fine),
 			(this_or_next|eq, ":imod", imod_large_bag),
 			(eq, ":imod", imod_plain),
 			(assign, ":continue", 1),

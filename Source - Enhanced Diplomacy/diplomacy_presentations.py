@@ -1273,9 +1273,6 @@ presentations = [
 						(faction_slot_eq, "$players_kingdom", slot_faction_culture, "fac_culture_player"),
 						(eq, ":troop_culture", "fac_culture_player"),
 						(is_between, ":troop_no", player_troops_begin, player_troops_end),
-						# (this_or_next|neq, "$players_kingdom", "fac_player_supporters_faction"),
-						# (eq, ":player_culture", "fac_culture_player"),
-						# (eq, ":faction_no", "$players_kingdom"),
 						(assign, ":treat_as_type", 2),
 					(else_try),
 						(neg|faction_slot_eq, "$players_kingdom", slot_faction_culture, "fac_culture_player"),
@@ -1291,9 +1288,18 @@ presentations = [
 					
 					(try_begin),
 						## TROOP ABILITY: BONUS_DEDICATED
+						(neg|is_between, ":troop_no", companions_begin, companions_end),
 						(call_script, "script_cf_ce_troop_has_ability", ":troop_no", BONUS_DEDICATED), # combat_scripts.py - ability constants in combat_constants.py
 						(val_sub, ":treat_as_type", 1),
-						(val_max, ":treat_as_type", 1),
+						(val_max, ":treat_as_type", 2),
+					(try_end),
+					
+					(try_begin),
+						## TROOP ABILITY: BONUS_MULTICULTURAL
+						(neg|is_between, ":troop_no", companions_begin, companions_end),
+						(call_script, "script_cf_ce_troop_has_ability", "trp_player", BONUS_MULTICULTURAL), # combat_scripts.py - ability constants in combat_constants.py
+						(val_sub, ":treat_as_type", 1),
+						(val_max, ":treat_as_type", 2),
 					(try_end),
 					
 					(try_begin),

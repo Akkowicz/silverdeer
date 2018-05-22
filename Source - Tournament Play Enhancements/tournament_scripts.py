@@ -1747,6 +1747,9 @@ scripts = [
 			(party_stack_get_troop_id, ":cur_troop", "p_temp_party", ":stack_no"),
 			(troop_is_hero, ":cur_troop"),
 			(neq, ":cur_troop", "trp_player"), # Bugfix: duplicate player filter.
+			## WINDYPLAINS+ ## - Oathbound - Prevent duplicate companions in tournaments.
+			(troop_slot_eq, ":cur_troop", slot_troop_in_player_merc_group, 0),
+			## WINDYPLAINS- ##
 			(troop_set_health, ":cur_troop", 100), # Sets everyone's health to full upon entry into the tournament.
 			(troop_set_slot, "trp_tournament_participants", ":cur_slot", ":cur_troop"), # Valid: Initial filling of local lords.
 			(val_add, ":cur_slot", 1),

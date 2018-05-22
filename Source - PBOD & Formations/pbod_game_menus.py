@@ -38,7 +38,9 @@ menu_opblock_addon = [
 deployment_mno_condition = [
 		(party_get_skill_level, ":tactics", "p_main_party", skl_tactics),
 		(ge, ":tactics", 2),
-		
+		## WINDYPLAINS+ ## - Oathbound - Prevent alternate entrances to combat if within contract army.
+		(neq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+		## WINDYPLAINS- ##
 		(call_script, "script_party_count_fit_for_battle", "p_collective_friends"),
 		(assign, ":friend_count", reg0),
 		(call_script, "script_party_count_fit_for_battle", "p_collective_enemy"),
@@ -51,12 +53,18 @@ deployment_mno_condition = [
 orders_mno_condition = [	  
 		(party_get_skill_level, ":tactics", "p_main_party", skl_tactics),
 		(ge, ":tactics", 2),
+		## WINDYPLAINS+ ## - Oathbound - Prevent alternate entrances to combat if within contract army.
+		(neq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+		## WINDYPLAINS- ##
 ]
 
 alt_attack_mno_condition = [	  
 		(party_get_skill_level, ":tactics", "p_main_party", skl_tactics),
 		(ge, ":tactics", 1),
 		(party_slot_eq, "p_main_party", slot_party_prebattle_plan, 0),
+		## WINDYPLAINS+ ## - Oathbound - Prevent alternate entrances to combat if within contract army.
+		(neq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+		## WINDYPLAINS- ##
 ]
 	  
 clear_orders = [
@@ -142,13 +150,27 @@ def add_pbod_to(objlist, menu_id):
 			newoption = ("hold", can_attack+alt_attack_mno_condition, "Take the field.", do_hold+do_attack)
 			menuoptions.insert(attack_i, newoption)
 		#create clear plan option
-		newoption = ("clear_orders", [(this_or_next|party_slot_eq, "p_main_party", slot_party_prebattle_customized_deployment, 1),
-		  (party_slot_eq, "p_main_party", slot_party_prebattle_plan, 1),], "Re-assess the situation.", clear_orders+[(jump_to_menu, "mnu_"+menuID),])
+		## WINDYPLAINS+ ## - Oathbound - Prevent PBOD extra menus while contracted.
+		newoption = ("clear_orders", 
+			[
+				(this_or_next|party_slot_eq, "p_main_party", slot_party_prebattle_customized_deployment, 1),
+				(party_slot_eq, "p_main_party", slot_party_prebattle_plan, 1),
+				## WINDYPLAINS+ ## - Oathbound - Prevent alternate entrances to combat if within contract army.
+				(neq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+				## WINDYPLAINS- ##
+			], "Re-assess the situation.", clear_orders+[(jump_to_menu, "mnu_"+menuID),])
 		menuoptions.insert(attack_i, newoption)
 		#if not ("siege" in menuID):		
 		#create use pb-orders option
-		newoption = ("do_orders", [(party_slot_eq, "p_main_party", slot_party_prebattle_plan, 1),], "Enough planning. To battle!", do_orders+do_attack)
+		newoption = ("do_orders", 
+			[
+				(party_slot_eq, "p_main_party", slot_party_prebattle_plan, 1),
+				## WINDYPLAINS+ ## - Oathbound - Prevent alternate entrances to combat if within contract army.
+				(neq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+				## WINDYPLAINS- ##
+			], "Enough planning. To battle!", do_orders+do_attack)
 		menuoptions.insert(attack_i, newoption)
+		## WINDYPLAINS- ##
 		#create make pb-orders option
 		newoption = ("orders", can_attack+orders_mno_condition, "Plan your battle with the enemy.", [(assign, "$g_next_menu", "mnu_"+menuID),(start_presentation, "prsnt_prebattle_orders"),])
 		menuoptions.insert(attack_i, newoption)

@@ -51,6 +51,7 @@ mods_active = [
 	"emblem",           # Silverstag Emblems - Windyplains
 	"questpack7",       # Quest Pack 7 (Misc Quests) - Windyplains
 	"cci",              # Custom Commissioned Items - Windyplains
+	"oath",             # Oathbound System - Windyplains
 ]
 
 

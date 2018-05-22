@@ -127,8 +127,9 @@ BONUS_RAPID_RELOAD                 = 54 # Increases the reloading speed of troop
 BONUS_FIRING_CAPTAIN               = 55 # Increases the reloading speed of nearby troops by 4% per point of Leadership.
 BONUS_SAVAGERY                     = 56 # Increases the courage lost by nearby troops when this troop defeats an enemy.
 BONUS_RALLYING_STRIKE              = 57 # Increases the courage gained by nearby troops when this troop defeats an enemy.
+BONUS_MULTICULTURAL                = 58 # (Player Only) Treats every unit under your command as having the Dedicated ability.
 ##
-BONUS_END_OF_ABILITIES             = 58
+BONUS_END_OF_ABILITIES             = 59
 
 
 # Berserker Settings
@@ -149,11 +150,16 @@ PREREQ_AFFILIATED                  = 7  # Requires that you are a part of the sa
 PREREQ_CHARTERED                   = 8  # Not implemented.
 PREREQ_UNIQUE_LOCATION_UPGRADE     = 9  # Used for slot upgrades on uniques to prevent them from being recruitable.
 PREREQ_LIEGE_RELATION              = 10 # Requires that you have a minimum of 50 relation with the leader of this faction.
+PREREQ_HIGH_UPKEEP                 = 11 # Increases the weekly upkeep cost for this troop by (CE_PREREQ_HIGH_UPKEEP_PENALTY)%.
+PREREQ_EXPENSIVE                   = 12 # Increases the hiring cost of this troop by (CE_PREREQ_EXPENSIVE_PENALTY)%.
 
 troop_prereq_friend_relation       = 10
 troop_prereq_ally_relation         = 25
 troop_prereq_liege_relation        = 50
-efficient_patrol_discount          = 2  # Value represents % discount per point of Leadership.
+efficient_patrol_discount          = 2   # Value represents % discount per point of Leadership.
+CE_PREREQ_HIGH_UPKEEP_PENALTY      = 100 # This is the % increase in upkeep cost per week for troops with this flag.
+CE_PREREQ_EXPENSIVE_PENALTY        = 50  # This is the % increase in hiring cost for troops with this flag.
+CE_ABILITY_DEVOTED_DISCOUNT        = 50  # This is the % decrease in upkeep cost per week for troops with this flag.
 
 ## ENCUMBRANCE
 ENCUMBRANCE_FACTOR_MOVEMENT_SPEED  = -2

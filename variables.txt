@@ -1441,3 +1441,10 @@ tpe_block_quests
 tournament_log_mode
 party_previous_caravan_trader
 cms_days_of_food_threshold
+oathbound_status
+oathbound_debugging
+oathbound_master
+oathbound_party
+oathbound_constract_started
+oathbound_remaining_hours
+oathbound_contract_started

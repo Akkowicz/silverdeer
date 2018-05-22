@@ -10938,6 +10938,9 @@ dialogs = [
 							 (neg|faction_slot_eq, "$g_talk_troop_faction", slot_faction_leader, "trp_player"),
 							 (neg|troop_slot_eq, "trp_player", slot_troop_spouse, "$g_talk_troop"),
 							 #                             (eq,"$g_talk_troop_faction","$players_kingdom")
+							 ## WINDYPLAINS+ ## - Oathbound - Prevent asking for quests if you're CONTRACTED.
+							 (neq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+							 ## WINDYPLAINS- ##
                              ],
    "Do you have any tasks for me?", "lord_request_mission_ask",[]],
 
@@ -11034,6 +11037,9 @@ dialogs = [
                              (neq, "$players_kingdom", "$g_talk_troop_faction"),
                              (store_partner_quest, ":lords_quest"),
                              (neq, ":lords_quest", "qst_join_faction"),
+							 ## WINDYPLAINS+ ## - Oathbound - Prevent joining a faction as vassal if you're contracted.
+							 (eq, "$oathbound_status", OATHBOUND_STATUS_NOT_HIRED),
+							 ## WINDYPLAINS- ##
                             ],
    "{s66}, I have come to offer you my sword in vassalage!", "lord_ask_enter_service",[]],
 
@@ -11502,9 +11508,31 @@ dialogs = [
    ]],
    
 #generic lord comments - must be far down
-   [anyone,"lord_start", [],
-   "What is it?", "lord_talk",[]],   
-
+   [anyone,"lord_start", 
+   [
+	## WINDYPLAINS+ ## - Oathbound (Optional) - Add rank to generic reply.
+	(str_clear, s21),
+	(try_begin),
+		# ## Separated player returns.
+		# (eq, "$g_talk_troop", "$oathbound_master"),
+		# (eq, "$oathbound_status", OATHBOUND_STATUS_SEPARATED),
+		# (call_script, "script_oath_set_contract_status", OATHBOUND_STATUS_CONTRACTED),
+		# # (call_script, "script_oath_get_current_oathbound_rank"), # Stores reg1 (rank)
+		# # (call_script, "script_oath_describe_oathbound_rank", reg1), # Stores s1 (rank name), s2 (rank title)
+		# (party_get_num_companion_stacks, reg2, "p_main_party"),
+		# (str_store_string, s21, "@After we split up I was not sure I would see you {reg2?and your men :}again.  It is good that I was wrong."),
+	# (else_try),
+		## Standard greeting.
+		(eq, "$g_talk_troop", "$oathbound_master"),
+		(call_script, "script_oath_get_current_oathbound_rank"), # Stores reg1 (rank)
+		(call_script, "script_oath_describe_oathbound_rank", reg1), # Stores s1 (rank name), s2 (rank title)
+		(str_store_string, s21, "@What do you need, {s2}{playername}?"),
+	(else_try),
+		(str_store_string, s21, "@What is it?"),
+	(try_end),
+   ],
+   "{s21}", "lord_talk",[]],   
+   ## WINDYPLAINS- ##
                      
   [anyone|plyr,"lord_talk",
    [

@@ -232,6 +232,7 @@ scripts = [
 		(try_end),
 		# Set total unspent points.
 		(troop_set_skill_points, ":troop_no", ":unspent_skills"),
+		(troop_set_attribute_points, ":troop_no", ":unspent_attributes"),
 		# Handle notification.
 		(try_begin),
 			(main_party_has_troop, ":troop_no"),

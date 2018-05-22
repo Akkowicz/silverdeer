@@ -1771,24 +1771,24 @@ scripts = [
 		(try_end),
 	]),
 
-# script_ccp_convert_trainer_to_training
-# PURPOSE: In Silverstag v0.15 the trainer skill was disabled and the training skill created to avoid the hard-coded effects of trainer.
-("ccp_convert_trainer_to_training",
-	[
-		(try_for_range, ":troop_no", 0, "trp_end_of_troops"),
-			(store_skill_level, ":trainer_skill", "skl_training", ":troop_no"),
-			(ge, ":trainer_skill", 1),
-			(troop_set_skill, ":troop_no", "skl_training", 0),
-			(troop_set_skill, ":troop_no", "skl_trainer", ":trainer_skill"),
-			### DIAGNOSTIC+ ###
-			# (is_between, ":troop_no", companions_begin, companions_end),
-			# (assign, reg31, ":trainer_skill"),
-			# (store_skill_level, reg32, "skl_trainer", ":troop_no"),
-			# (str_store_troop_name, s31, ":troop_no"),
-			# (display_message, "@DEBUG (Training): {s31} had {reg31} trainer skill.  Now has {reg32} trainer.", gpu_debug),
-			### DIAGNOSTIC- ###
-		(try_end),
-	]),
+# # script_ccp_convert_trainer_to_training
+# # PURPOSE: In Silverstag v0.15 the trainer skill was disabled and the training skill created to avoid the hard-coded effects of trainer.
+# ("ccp_convert_trainer_to_training",
+	# [
+		# (try_for_range, ":troop_no", 0, "trp_end_of_troops"),
+			# (store_skill_level, ":trainer_skill", "skl_training", ":troop_no"),
+			# (ge, ":trainer_skill", 1),
+			# (troop_set_skill, ":troop_no", "skl_training", 0),
+			# (troop_set_skill, ":troop_no", "skl_trainer", ":trainer_skill"),
+			# ### DIAGNOSTIC+ ###
+			# # (is_between, ":troop_no", companions_begin, companions_end),
+			# # (assign, reg31, ":trainer_skill"),
+			# # (store_skill_level, reg32, "skl_trainer", ":troop_no"),
+			# # (str_store_troop_name, s31, ":troop_no"),
+			# # (display_message, "@DEBUG (Training): {s31} had {reg31} trainer skill.  Now has {reg32} trainer.", gpu_debug),
+			# ### DIAGNOSTIC- ###
+		# (try_end),
+	# ]),
 ]
 
 

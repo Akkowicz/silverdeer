@@ -621,11 +621,28 @@ game_menus = [
 		"none",
 		[],
 		[
-			("test_relation_gain", [], "Increase relation with random lord. (player)",
+			("list_advisors", [], "List all advisors",
 				[
-					(store_random_in_range, ":troop_no", active_npcs_begin, active_npcs_end),
-					(store_random_in_range, ":relation_boost", 1, 4),
-					(call_script, "script_change_player_relation_with_troop", ":troop_no", ":relation_boost", 0),
+					(display_message, "@DEBUG: List of Advisors+", gpu_green),
+					(try_for_range, ":center_no", walled_centers_begin, walled_centers_end),
+						(try_for_range, ":advisor_slot", advisors_begin, advisors_end),
+							(party_get_slot, ":advisor_no", ":center_no", ":advisor_slot"),
+							(ge, ":advisor_no", 1),
+							(store_sub, ":string_offset", ":advisor_no", advisors_begin),
+							(store_add, ":string_advisor", "str_diplomacy_advisor_steward", ":string_offset"),
+							(str_store_troop_name, s21, ":advisor_no"),
+							(str_store_string, s22, ":string_advisor"),
+							(str_store_party_name, s23, ":center_no"),
+							(assign, reg21, ":advisor_no"),
+							(display_message, "@DEBUG: {s21} is serving as {s22} in {s23}.", gpu_debug),
+						(try_end),
+					(try_end),
+					(display_message, "@DEBUG: List of Advisors-", gpu_green),
+				]),
+			
+			("test_add_party_xp", [], "Add 10,000xp to party",
+				[
+					(party_upgrade_with_xp, "p_main_party", 10000, 1),
 				]),
 			
 			("test_relation_gain", [], "Increase relation with random lord. (troop)",
@@ -4520,6 +4537,27 @@ game_menus = [
         #(party_set_ai_behavior, "$g_encountered_party", ai_bhvr_driven_by_party),
 		## WINDYPLAINS- ##
         (party_set_ai_object,"$g_encountered_party", "p_main_party"),
+		## WINDYPLAINS+ ## - Oathbound - Quest "The Butcher's Bill" - Drives cattle to follow player.
+		(try_begin),
+			# FILTER - Cattle not already claimed by quest "qst_move_cattle_herd".
+			(check_quest_active, "qst_move_cattle_herd"),
+			(neg|check_quest_concluded, "qst_move_cattle_herd"),
+			(quest_slot_eq, "qst_move_cattle_herd", slot_quest_target_party, "$g_encountered_party"),
+			# Already taken.
+		(else_try),
+			# FILTER - Cattle not already claimed by quest "qst_oath_butchers_bill". (If they drive them again)
+			(check_quest_active, "qst_oath_butchers_bill"),
+			(neg|check_quest_concluded, "qst_oath_butchers_bill"),
+			(quest_slot_eq, "qst_oath_butchers_bill", slot_quest_target_party, "$g_encountered_party"),
+			# Already taken.
+		(else_try),
+			# Claim the cattle for quest "qst_oath_butchers_bill".
+			(check_quest_active, "qst_oath_butchers_bill"),
+			(neg|check_quest_concluded, "qst_oath_butchers_bill"),
+			(quest_slot_eq, "qst_oath_butchers_bill", slot_quest_target_party, -1),
+			(quest_set_slot, "qst_oath_butchers_bill", slot_quest_target_party, "$g_encountered_party"),
+		(try_end),
+		## WINDYPLAINS- ##
         (change_screen_return),
         ]
        ),
@@ -5554,7 +5592,6 @@ game_menus = [
           # Talk to ally leader          
           (eq, "$thanked_by_ally_leader", 0),
           (assign, "$thanked_by_ally_leader", 1),
-
           (gt, "$g_ally_party", 0),          
           #(store_add, ":total_str_without_player", "$g_starting_strength_ally_party", "$g_starting_strength_enemy_party"),                    
           
@@ -5586,6 +5623,7 @@ game_menus = [
           (party_stack_get_troop_dna, ":ally_leader_dna", "$g_ally_party", 0),
           (try_begin),
             (troop_is_hero, ":ally_leader"),
+			
             (troop_get_slot, ":hero_relation", ":ally_leader", slot_troop_player_relation),
             (assign, ":rel_boost", "$g_relation_boost"),
             (try_begin),
@@ -5600,8 +5638,16 @@ game_menus = [
 			(try_end),
 			## WINDYPLAINS- ##
           (try_end),
-          (assign, "$talk_context", tc_ally_thanks),
-          (call_script, "script_setup_troop_meeting", ":ally_leader", ":ally_leader_dna"),
+		  ## WINDYPLAINS+ ## - Oathbound - Prevent being thanked for helping your $oathbound_master while contracted and in party.
+		  (try_begin),
+			(ge, "$oathbound_debugging", 1),
+			(eq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+			(display_message, "@DEBUG (Oathbound): Player prevented from being thanked due to CONTRACTED status.", gpu_debug),
+		  (try_end),
+		  (neq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+		  (assign, "$talk_context", tc_ally_thanks),
+		  (call_script, "script_setup_troop_meeting", ":ally_leader", ":ally_leader_dna"),
+		  ## WINDYPLAINS- ##
         (else_try),
           # Talk to enemy leaders                                        
           (assign, ":break", 0),
@@ -5654,7 +5700,6 @@ game_menus = [
               (store_add, "$last_defeated_hero", ":stack_no", 1),                    
               (call_script, "script_remove_troop_from_prison", ":stack_troop"),
               (troop_set_slot, ":stack_troop", slot_troop_leaded_party, -1),
-
               (assign, "$talk_context", tc_hero_defeated),                            
 			  
               (call_script, "script_setup_troop_meeting", ":stack_troop", ":stack_troop_dna"),
@@ -5680,6 +5725,14 @@ game_menus = [
           (eq, ":break", 1),          
         (else_try),                 
           (eq, "$capture_screen_shown", 0),
+		  ## WINDYPLAINS+ ## - Oathbound - Prevent taking prisoners lord while contracted and in party.
+		  (try_begin),
+			(ge, "$oathbound_debugging", 1),
+			(eq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+			(display_message, "@DEBUG (Oathbound): Player prevented from taking common prisoners due to CONTRACTED status.", gpu_debug),
+		  (try_end),
+		  (neq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+		  ## WINDYPLAINS- ##
           (assign, "$capture_screen_shown", 1),
           (party_clear, "p_temp_party"),
           (assign, "$g_move_heroes", 0),          
@@ -6152,6 +6205,21 @@ game_menus = [
 			(str_clear, s25),
 		(try_end),
 		
+		## WINDYPLAINS+ ## - Oathbound - Auto-join $oathbound_master's side.
+		# (try_begin),
+			# (eq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+			# (try_begin),
+				# (eq, "$g_encountered_party", "$oathbound_master"),
+				# (assign,"$g_ally_party","$g_encountered_party"),
+				# (assign,"$g_enemy_party","$g_encountered_party_2"),
+			# (else_try),
+				# (eq, "$g_encountered_party_2", "$oathbound_master"),
+				# (assign,"$g_enemy_party","$g_encountered_party"),
+				# (assign,"$g_ally_party","$g_encountered_party_2"),
+			# (try_end),
+			# (jump_to_menu,"mnu_join_battle"),
+		# (try_end),
+		## WINDYPLAINS- ##
       ],
     [
       ("pre_join_help_attackers",[
@@ -6161,6 +6229,11 @@ game_menus = [
          # (store_faction_of_party, ":defender_faction", "$g_encountered_party"),
          # (store_relation, ":defender_relation", ":defender_faction", "fac_player_supporters_faction"),
 		 (try_begin),
+			(party_is_active, "$oathbound_party"),
+			(store_faction_of_party, ":faction_oathbound", "$oathbound_party"),
+			(eq, ":faction_oathbound", ":attacker_faction"),
+			(str_store_string, s21, "@Oathbound Faction"),
+		 (else_try),
 			(eq, ":attacker_faction", "$players_kingdom"),
 			(str_store_string, s21, "@Ally"),
 		 (else_try),
@@ -6172,28 +6245,6 @@ game_menus = [
 		 (else_try),
 			(str_store_string, s21, "@Neutral"),
 		 (try_end),
-		 # (ge, ":attacker_relation", 0),
-         # (lt, ":defender_relation", 0),
-			# (party_get_num_companions, ":soldiers", "$g_encountered_party_2"),
-			# (assign, ":count", 0),
-			# ### DIAGNOSTIC+ ###
-			# (assign, reg31, ":count"),
-			# (assign, reg32, ":soldiers"),
-			# (str_store_party_name, s31, "$g_encountered_party_2"),
-			# (display_message, "@DEBUG: Attackers '{s31}' - {reg31} - {reg32} men.", gpu_debug),
-			# ### DIAGNOSTIC- ###
-			# (try_for_attached_parties, ":attached_party_no", "$g_encountered_party_2"),
-				# (party_get_num_companions, ":soldier_count", ":attached_party_no"),
-				# (val_add, ":soldiers", ":soldier_count"),
-				# ### DIAGNOSTIC+ ###
-				# (str_store_party_name, s31, ":attached_party_no"),
-				# (assign, reg31, ":count"),
-				# (assign, reg32, ":soldier_count"),
-				# (assign, reg33, ":soldiers"),
-				# (display_message, "@DEBUG: Attackers '{s31}' - {reg31} - {reg32} men - {reg33} total", gpu_debug),
-				# ### DIAGNOSTIC- ###
-			# (try_end),
-			# (assign, reg21, ":soldiers"),
           ],
           "Move in to help {s2}. ({s21})",[
               (select_enemy,0),
@@ -6228,6 +6279,23 @@ game_menus = [
 					(call_script, "script_change_player_relation_with_faction", ":faction_no", -2),
 				(try_end),
 			  ## WINDYPLAINS- ##
+			  ## WINDYPLAINS+ ## - Oathbound - Attacking a member of your master's faction chances Desertion status.
+			  (try_begin),
+				(store_troop_faction, ":faction_oathbound", "$oathbound_master"),
+				(store_faction_of_party, ":faction_enemy", "$g_enemy_party"),
+				(eq, ":faction_oathbound", ":faction_enemy"),
+				(store_random_in_range, ":roll", 0, 100),
+				(store_mul, ":chance_of_detection", "$oathbound_betrayed_faction", OATHBOUND_BATTLE_DESERTION_CHANCE),
+				(val_add, ":chance_of_detection", OATHBOUND_BATTLE_DESERTION_CHANCE),
+				(lt, ":roll", ":chance_of_detection"),
+				(val_add, "$oathbound_betrayed_faction", 1),
+				# Update faction betrayals
+				(faction_get_slot, ":betrayals", ":faction_oathbound", slot_faction_oathbound_betrayals),
+				(val_add, ":betrayals", 1),
+				(faction_set_slot, ":faction_oathbound", slot_faction_oathbound_betrayals, ":betrayals"),
+				(call_script, "script_oath_set_contract_status", OATHBOUND_STATUS_DESERTER),
+			  (try_end),
+			  ## WINDYPLAINS- ##
               (jump_to_menu,"mnu_join_battle")]),
 		 ## WINDYPLAINS- ##
 		 
@@ -6238,6 +6306,11 @@ game_menus = [
 			(store_faction_of_party, ":defender_faction", "$g_encountered_party"),
 			(store_relation, ":defender_relation", ":defender_faction", "fac_player_supporters_faction"),
 		    (try_begin),
+				(party_is_active, "$oathbound_party"),
+				(store_faction_of_party, ":faction_oathbound", "$oathbound_party"),
+				(eq, ":faction_oathbound", ":defender_faction"),
+				(str_store_string, s21, "@Oathbound Faction"),
+			(else_try),
 				(eq, ":defender_relation", "$players_kingdom"),
 				(str_store_string, s21, "@Ally"),
 			(else_try),
@@ -6249,28 +6322,6 @@ game_menus = [
 			(else_try),
 				(str_store_string, s21, "@Neutral"),
 			(try_end),
-			# (ge, ":defender_relation", 0),
-			# (lt, ":attacker_relation", 0),
-			# (party_get_num_companions, ":soldiers", "$g_encountered_party"),
-			# (assign, ":count", 0),
-			# ### DIAGNOSTIC+ ###
-			# (assign, reg31, ":count"),
-			# (assign, reg32, ":soldiers"),
-			# (str_store_party_name, s31, "$g_encountered_party"),
-			# (display_message, "@DEBUG: Defenders '{s31}' - {reg31} - {reg32} men.", gpu_debug),
-			# ### DIAGNOSTIC- ###
-			# (try_for_attached_parties, ":attached_party_no", "$g_encountered_party"),
-				# (party_get_num_companions, ":soldier_count", ":attached_party_no"),
-				# (val_add, ":soldiers", ":soldier_count"),
-				# ### DIAGNOSTIC+ ###
-				# (str_store_party_name, s31, ":attached_party_no"),
-				# (assign, reg31, ":count"),
-				# (assign, reg32, ":soldier_count"),
-				# (assign, reg33, ":soldiers"),
-				# (display_message, "@DEBUG: Defenders '{s31}' - {reg31} - {reg32} men - {reg33} total", gpu_debug),
-				# ### DIAGNOSTIC- ###
-			# (try_end),
-			# (assign, reg21, ":soldiers"),
           ],
           "Rush to the aid of the {s1}. ({s21})",[
               (select_enemy,1),
@@ -6304,6 +6355,19 @@ game_menus = [
 					(store_faction_of_party, ":faction_no", "$g_enemy_party"),
 					(call_script, "script_change_player_relation_with_faction", ":faction_no", -2),
 				(try_end),
+			  ## WINDYPLAINS- ##
+			  ## WINDYPLAINS+ ## - Oathbound - Attacking a member of your master's faction chances Desertion status.
+			  (try_begin),
+				(store_troop_faction, ":faction_oathbound", "$oathbound_master"),
+				(store_faction_of_party, ":faction_enemy", "$g_enemy_party"),
+				(eq, ":faction_oathbound", ":faction_enemy"),
+				(store_random_in_range, ":roll", 0, 100),
+				(store_mul, ":chance_of_detection", "$oathbound_betrayed_faction", OATHBOUND_BATTLE_DESERTION_CHANCE),
+				(val_add, ":chance_of_detection", OATHBOUND_BATTLE_DESERTION_CHANCE),
+				(lt, ":roll", ":chance_of_detection"),
+				(val_add, "$oathbound_betrayed_faction", 1),
+				(call_script, "script_oath_set_contract_status", OATHBOUND_STATUS_DESERTER),
+			  (try_end),
 			  ## WINDYPLAINS- ##
               (jump_to_menu,"mnu_join_battle")]),
 			## WINDYPLAINS- ##
@@ -6638,6 +6702,22 @@ game_menus = [
         (else_try),
           (set_background_mesh, "mesh_pic_siege_sighted"),
         (try_end),
+		## WINDYPLAINS+ ## - Oathbound - Joining a siege in progress.
+		(try_begin),
+			(eq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+			(try_begin),
+				(store_troop_faction, ":commanders_faction", "$enlisted_lord"),
+				(store_relation, ":relation", ":commanders_faction", "$g_encountered_party_faction"),
+				(this_or_next|eq, ":commanders_faction", "$g_encountered_party_faction"), #encountered party is always the castle/town sieged
+				(ge, ":relation", 0),
+				(assign, "$g_defending_against_siege", 1),
+				(assign, "$g_siege_first_encounter", 1),
+				(jump_to_menu, "mnu_siege_started_defender"),
+			(else_try),
+				(jump_to_menu, "mnu_besiegers_camp_with_allies"),
+			(try_end),
+		(try_end),
+		## WINDYPLAINS- ##
     ],
     [
       ("approach_besiegers",[(store_faction_of_party, ":faction_no", "$g_encountered_party_2"),
@@ -6736,7 +6816,10 @@ game_menus = [
                                 (change_screen_map_conversation, ":siege_leader_id")]),
       ("join_siege_with_allies",[(neg|troop_is_wounded, "trp_player")], "Join the next assault.",
        [
-           (assign, "$g_joined_battle_to_help", 1), 
+           ## WINDYPLAINS+ ## - Oathbound (Optional) - Event Log (Joining a Siege Attack)
+		   (call_script, "script_oath_add_log_entry", "$oathbound_events", OATHBOUND_EVENT_JOINED_SIEGE, "$g_encountered_party"), ## OATHBOUND EVENT LOG
+		   ## WINDYPLAINS- ##
+		   (assign, "$g_joined_battle_to_help", 1), 
            (party_set_next_battle_simulation_time, "$g_encountered_party", -1),
            (try_begin),
              (check_quest_active, "qst_join_siege_with_army"),
@@ -8162,8 +8245,7 @@ game_menus = [
     ],
 ),
 
-
-
+  
 (
     "requested_castle_granted_to_another_female", mnf_scale_picture,
     "You receive a message from your monarch, {s3}.^^\
@@ -8195,8 +8277,6 @@ game_menus = [
         ]),
     ],
 ),
-
-
   
   
   
@@ -8580,7 +8660,10 @@ game_menus = [
          (neg|troop_is_wounded, "trp_player"),
          ],
           "Join the battle.",[              
-              (party_set_next_battle_simulation_time, "$g_encountered_party", -1),
+              ## WINDYPLAINS+ ## - Oathbound (Optional) - Event Log (Joining a Siege Defence)
+			  (call_script, "script_oath_add_log_entry", "$oathbound_events", OATHBOUND_EVENT_DEFENDED_SIEGE, "$g_encountered_party"), ## OATHBOUND EVENT LOG
+			  ## WINDYPLAINS- ##
+			  (party_set_next_battle_simulation_time, "$g_encountered_party", -1),
               (assign, "$g_battle_result", 0),
               (try_begin),
                 (party_slot_eq, "$g_encountered_party", slot_party_type, spt_town),
@@ -10588,6 +10671,18 @@ game_menus = [
 			 
 			 (neg|troop_slot_ge, "trp_player", slot_troop_spouse, active_npcs_begin), #Married players always make the cut
 			 
+			 ## WINDYPLAINS+ ## - Oathbound (Optional) - Allow entry into Lord's court.
+			 (assign, ":pass", 1),
+			 (try_begin),
+				(neq, "$oathbound_status", OATHBOUND_STATUS_NOT_HIRED),
+				(call_script, "script_get_heroes_attached_to_center", "$current_town", "p_temp_party"),
+				(party_count_companions_of_type, ":lord_check", "p_temp_party", "$oathbound_master"),
+				(this_or_next|party_slot_eq, "$current_town", slot_town_lord, "$oathbound_master"), # You can enter your lord's court.
+				(ge, ":lord_check", 1),
+				(assign, ":pass", 0),
+			 (try_end),
+			 (eq, ":pass", 1),
+			 ## WINDYPLAINS- ##
              (jump_to_menu, "mnu_cannot_enter_court"),
 			(else_try),
 			  (assign, "$town_entered", 1),              
@@ -16543,6 +16638,11 @@ game_menus = [
 	"none",
 	[
 		(assign, ":base_chance", 100),
+		# Add base party spotting & tracking.
+		(party_get_skill_level, ":skill", "p_main_party", "skl_tracking"),
+		(val_add, ":base_chance", ":skill"),
+		(party_get_skill_level, ":skill", "p_main_party", "skl_spotting"),
+		(val_add, ":base_chance", ":skill"),
 		(assign, ":stealth_chance", ":base_chance"),
 		
 		# Get party size.  -4% per troop.

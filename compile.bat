@@ -28,6 +28,7 @@ copy ".\Source - Center Management\*.py" ".\" >>Process_Log.txt
 copy ".\Source - Garrison Recruitment\*.py" ".\" >>Process_Log.txt
 copy ".\Source - Silverstag Emblems\*.py" ".\" >>Process_Log.txt
 copy ".\Source - Commissioned Items\*.py" ".\" >>Process_Log.txt
+copy ".\Source - Oathbound\*.py" ".\" >>Process_Log.txt
 
 python compile.py tag %1 %2 %3 %4 %5 %6 %7 %8 %9
 

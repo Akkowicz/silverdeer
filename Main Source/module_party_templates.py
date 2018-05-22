@@ -156,14 +156,14 @@ party_templates = [
  # GAME_MODE_NORMAL
  ("kingdom_1_reinforcements_d", "kingdom_1_reinforcements_d", 0, 0, fac_commoners, 0, [(trp_r_swadian_militia,11,26),(trp_r_swadian_footman,3,7),(trp_r_swadian_hunter,5,10)]),
  ("kingdom_1_reinforcements_e", "kingdom_1_reinforcements_e", 0, 0, fac_commoners, 0, [(trp_r_swadian_billman,8,15),(trp_r_swadian_crossbowman,5,13)]),
- ("kingdom_1_reinforcements_f", "kingdom_1_reinforcements_f", 0, 0, fac_commoners, 0, [(trp_r_swadian_man_at_arms,2,6),(trp_r_swadian_sergeant,2,5),(trp_r_swadian_mercenary,2,5), (trp_r_swadian_man_at_arms, 2,7)]),
+ ("kingdom_1_reinforcements_f", "kingdom_1_reinforcements_f", 0, 0, fac_commoners, 0, [(trp_r_swadian_man_at_arms,4,8),(trp_r_swadian_sergeant,2,5),(trp_r_swadian_mercenary,2,5),]),
   # GAME_MODE_HARD
  ("kingdom_1_reinforcements_g", "kingdom_1_reinforcements_g", 0, 0, fac_commoners, 0, [(trp_r_swadian_footman,8,20),(trp_r_swadian_hunter,6,13),]),
  ("kingdom_1_reinforcements_h", "kingdom_1_reinforcements_h", 0, 0, fac_commoners, 0, [(trp_r_swadian_billman,5,10),(trp_r_swadian_crossbowman,3,8),(trp_r_swadian_lancer,5,10)]),
- ("kingdom_1_reinforcements_i", "kingdom_1_reinforcements_i", 0, 0, fac_commoners, 0, [(trp_r_swadian_sergeant,2,5),(trp_r_swadian_mercenary,2,5),(trp_r_swadian_man_at_arms,3,10)]),
+ ("kingdom_1_reinforcements_i", "kingdom_1_reinforcements_i", 0, 0, fac_commoners, 0, [(trp_r_swadian_sergeant,2,5),(trp_r_swadian_mercenary,2,5),(trp_r_swadian_man_at_arms,6,10)]),
  # GAME_MODE_VERY_HARD
  ("kingdom_1_reinforcements_j", "kingdom_1_reinforcements_j", 0, 0, fac_commoners, 0, [(trp_r_swadian_hunter,2,4),(trp_r_swadian_billman,3,8),(trp_r_swadian_crossbowman,3,6),(trp_r_swadian_lancer,6,15)]),
- ("kingdom_1_reinforcements_k", "kingdom_1_reinforcements_k", 0, 0, fac_commoners, 0, [(trp_r_swadian_billman,1,4),(trp_r_swadian_crossbowman,1,3),(trp_r_swadian_lancer,8,13),(trp_r_swadian_sergeant,2,4),(trp_r_swadian_mercenary,1,4)]),
+ ("kingdom_1_reinforcements_k", "kingdom_1_reinforcements_k", 0, 0, fac_commoners, 0, [(trp_r_swadian_man_at_arms,7,10),(trp_r_swadian_billman,1,4),(trp_r_swadian_crossbowman,1,3),(trp_r_swadian_lancer,8,13),(trp_r_swadian_sergeant,2,4),(trp_r_swadian_mercenary,1,4)]),
  ("kingdom_1_reinforcements_l", "kingdom_1_reinforcements_l", 0, 0, fac_commoners, 0, [(trp_r_swadian_sergeant,2,3),(trp_r_swadian_mercenary,2,3),(trp_r_swadian_man_at_arms,5,15)]),
  
 
@@ -225,41 +225,77 @@ party_templates = [
  
  
  ### RHODOKS ### - NEW TROOPS
- # GAME_MODE_EASY
- ("kingdom_5_reinforcements_a", "kingdom_5_reinforcements_a", 0, 0, fac_commoners, 0, [(trp_rhodok_militia,8,18),(trp_rhodok_trained_militia,8,18),(trp_rhodok_trained_militia,3,7)]),
- ("kingdom_5_reinforcements_b", "kingdom_5_reinforcements_b", 0, 0, fac_commoners, 0, [(trp_rhodok_trained_militia,8,15),(trp_rhodok_crossbowman,6,13)]),
- ("kingdom_5_reinforcements_c", "kingdom_5_reinforcements_c", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman,3,8),(trp_rhodok_crossbowman_2,3,8),(trp_rhodok_arbalestier,2,5)]),
- # GAME_MODE_NORMAL
- ("kingdom_5_reinforcements_d", "kingdom_5_reinforcements_d", 0, 0, fac_commoners, 0, [(trp_rhodok_militia,6,13),(trp_rhodok_trained_militia,4,11),(trp_rhodok_crossbowman,7,12)]),
- ("kingdom_5_reinforcements_e", "kingdom_5_reinforcements_e", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman,8,15),(trp_rhodok_crossbowman_2,2,8),(trp_rhodok_arbalestier,4,10)]),
- ("kingdom_5_reinforcements_f", "kingdom_5_reinforcements_f", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman_2,3,8),(trp_rhodok_arbalestier,3,8),(trp_rhodok_siege_commander,1,3),(trp_rhodok_mercenary_captain,0,2)]),
- # GAME_MODE_HARD
- ("kingdom_5_reinforcements_g", "kingdom_5_reinforcements_g", 0, 0, fac_commoners, 0, [(trp_rhodok_trained_militia,8,20),(trp_rhodok_crossbowman,6,13)]),
- ("kingdom_5_reinforcements_h", "kingdom_5_reinforcements_h", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman,7,15),(trp_rhodok_crossbowman_2,6,13),(trp_rhodok_arbalestier,4,10),(trp_rhodok_highland_pikeman,2,6)]),
- ("kingdom_5_reinforcements_i", "kingdom_5_reinforcements_i", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman_2,3,8),(trp_rhodok_arbalestier,3,8),(trp_rhodok_hedge_knight,1,4),(trp_rhodok_siege_commander,1,2),(trp_rhodok_mercenary_captain,1,1)]),
- # GAME_MODE_VERY_HARD
- ("kingdom_5_reinforcements_j", "kingdom_5_reinforcements_j", 0, 0, fac_commoners, 0, [(trp_rhodok_crossbowman,2,4),(trp_rhodok_pikeman,6,15),(trp_rhodok_crossbowman_2,6,14)]),
- ("kingdom_5_reinforcements_k", "kingdom_5_reinforcements_k", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman,5,11),(trp_rhodok_crossbowman_2,2,5),(trp_rhodok_pikeman_2,3,8),(trp_rhodok_arbalestier,4,10),(trp_rhodok_siege_commander,2,5)]),
- ("kingdom_5_reinforcements_l", "kingdom_5_reinforcements_l", 0, 0, fac_commoners, 0, [(trp_rhodok_arbalestier,3,8),(trp_rhodok_hedge_knight,1,4),(trp_rhodok_siege_commander,1,3),(trp_rhodok_mercenary_captain,1,3),(trp_rhodok_siege_breaker,1,4)]),
  
+ # Leifdin - 2015-08-12 - new templates to increase overall strength of Rhodok armies
+ ("kingdom_5_reinforcements_a", "kingdom_5_reinforcements_a", 0, 0, fac_commoners, 0, [(trp_rhodok_militia,4,5),(trp_rhodok_trained_militia,12,18),(trp_rhodok_pikeman,1,4)]),
+ ("kingdom_5_reinforcements_b", "kingdom_5_reinforcements_b", 0, 0, fac_commoners, 0, [(trp_rhodok_trained_militia,4,7),(trp_rhodok_crossbowman,6,13),(trp_rhodok_arbalestier,2,4),(trp_rhodok_pikeman,2,4)]),
+ ("kingdom_5_reinforcements_c", "kingdom_5_reinforcements_c", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman,2,4),(trp_rhodok_crossbowman_2,2,4),(trp_rhodok_arbalestier,2,5),(trp_rhodok_highland_pikeman,5,8)]),
+ # GAME_MODE_NORMAL
+ ("kingdom_5_reinforcements_d", "kingdom_5_reinforcements_d", 0, 0, fac_commoners, 0, [(trp_rhodok_militia,3,4),(trp_rhodok_trained_militia,4,8),(trp_rhodok_crossbowman,7,12),(trp_rhodok_pikeman,2,5)]),
+ ("kingdom_5_reinforcements_e", "kingdom_5_reinforcements_e", 0, 0, fac_commoners, 0, [(trp_rhodok_trained_militia,3,5),(trp_rhodok_pikeman,4,8),(trp_rhodok_crossbowman_2,2,5),(trp_rhodok_arbalestier,4,10),(trp_rhodok_highland_pikeman,8,12)]),
+ ("kingdom_5_reinforcements_f", "kingdom_5_reinforcements_f", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman_2,3,8),(trp_rhodok_arbalestier,3,8),(trp_rhodok_siege_commander,1,3),(trp_rhodok_mercenary_captain,0,2),(trp_rhodok_highland_pikeman,4,8)]),
+ # GAME_MODE_HARD
+ ("kingdom_5_reinforcements_g", "kingdom_5_reinforcements_g", 0, 0, fac_commoners, 0, [(trp_rhodok_trained_militia,2,4),(trp_rhodok_crossbowman,4,6),(trp_rhodok_arbalestier,3,6),(trp_rhodok_pikeman,3,6),(trp_rhodok_highland_pikeman,1,2)]),
+ ("kingdom_5_reinforcements_h", "kingdom_5_reinforcements_h", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman,4,8),(trp_rhodok_crossbowman_2,3,5),(trp_rhodok_arbalestier,8,10),(trp_rhodok_highland_pikeman,10,15),(trp_rhodok_siege_commander,0,1),(trp_veluca_pikeman,0,1)]),
+ ("kingdom_5_reinforcements_i", "kingdom_5_reinforcements_i", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman_2,2,4),(trp_rhodok_arbalestier,2,4),(trp_rhodok_hedge_knight,1,4),(trp_rhodok_siege_commander,1,2),(trp_rhodok_mercenary_captain,1,1),(trp_rhodok_siege_breaker,1,2),(trp_rhodok_highland_pikeman,12,16)]),
+ # GAME_MODE_VERY_HARD
+ ("kingdom_5_reinforcements_j", "kingdom_5_reinforcements_j", 0, 0, fac_commoners, 0, [(trp_rhodok_arbalestier,2,4),(trp_rhodok_pikeman,4,10),(trp_rhodok_crossbowman_2,4,10),(trp_rhodok_highland_pikeman,5,15)]),
+ ("kingdom_5_reinforcements_k", "kingdom_5_reinforcements_k", 0, 0, fac_commoners, 0, [(trp_rhodok_highland_pikeman,5,11),(trp_rhodok_crossbowman_2,2,5),(trp_rhodok_pikeman_2,3,8),(trp_rhodok_arbalestier,4,10),(trp_rhodok_siege_commander,2,5),(trp_rhodok_mercenary_captain,1,2)]),
+ ("kingdom_5_reinforcements_l", "kingdom_5_reinforcements_l", 0, 0, fac_commoners, 0, [(trp_rhodok_arbalestier,3,8),(trp_rhodok_hedge_knight,1,4),(trp_rhodok_siege_commander,1,3),(trp_rhodok_mercenary_captain,1,3),(trp_rhodok_siege_breaker,1,4),(trp_rhodok_highland_pikeman,8,16)]),
+ # Old party templates
+ # GAME_MODE_EASY
+ #("kingdom_5_reinforcements_a", "kingdom_5_reinforcements_a", 0, 0, fac_commoners, 0, [(trp_rhodok_militia,8,18),(trp_rhodok_trained_militia,8,18),(trp_rhodok_trained_militia,3,7)]),
+ #("kingdom_5_reinforcements_b", "kingdom_5_reinforcements_b", 0, 0, fac_commoners, 0, [(trp_rhodok_trained_militia,8,15),(trp_rhodok_crossbowman,6,13)]),
+ #("kingdom_5_reinforcements_c", "kingdom_5_reinforcements_c", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman,3,8),(trp_rhodok_crossbowman_2,3,8),(trp_rhodok_arbalestier,2,5)]),
+ # GAME_MODE_NORMAL
+ #("kingdom_5_reinforcements_d", "kingdom_5_reinforcements_d", 0, 0, fac_commoners, 0, [(trp_rhodok_militia,6,13),(trp_rhodok_trained_militia,4,11),(trp_rhodok_crossbowman,7,12)]),
+ #("kingdom_5_reinforcements_e", "kingdom_5_reinforcements_e", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman,8,15),(trp_rhodok_crossbowman_2,2,8),(trp_rhodok_arbalestier,4,10)]),
+ #("kingdom_5_reinforcements_f", "kingdom_5_reinforcements_f", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman_2,3,8),(trp_rhodok_arbalestier,3,8),(trp_rhodok_siege_commander,1,3),(trp_rhodok_mercenary_captain,0,2)]),
+ # GAME_MODE_HARD
+ #("kingdom_5_reinforcements_g", "kingdom_5_reinforcements_g", 0, 0, fac_commoners, 0, [(trp_rhodok_trained_militia,8,20),(trp_rhodok_crossbowman,6,13)]),
+ #("kingdom_5_reinforcements_h", "kingdom_5_reinforcements_h", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman,7,15),(trp_rhodok_crossbowman_2,6,13),(trp_rhodok_arbalestier,4,10),(trp_rhodok_highland_pikeman,2,6)]),
+ #("kingdom_5_reinforcements_i", "kingdom_5_reinforcements_i", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman_2,3,8),(trp_rhodok_arbalestier,3,8),(trp_rhodok_hedge_knight,1,4),(trp_rhodok_siege_commander,1,2),(trp_rhodok_mercenary_captain,1,1)]),
+ # GAME_MODE_VERY_HARD
+ #("kingdom_5_reinforcements_j", "kingdom_5_reinforcements_j", 0, 0, fac_commoners, 0, [(trp_rhodok_crossbowman,2,4),(trp_rhodok_pikeman,6,15),(trp_rhodok_crossbowman_2,6,14)]),
+ #("kingdom_5_reinforcements_k", "kingdom_5_reinforcements_k", 0, 0, fac_commoners, 0, [(trp_rhodok_pikeman,5,11),(trp_rhodok_crossbowman_2,2,5),(trp_rhodok_pikeman_2,3,8),(trp_rhodok_arbalestier,4,10),(trp_rhodok_siege_commander,2,5)]),
+ #("kingdom_5_reinforcements_l", "kingdom_5_reinforcements_l", 0, 0, fac_commoners, 0, [(trp_rhodok_arbalestier,3,8),(trp_rhodok_hedge_knight,1,4),(trp_rhodok_siege_commander,1,3),(trp_rhodok_mercenary_captain,1,3),(trp_rhodok_siege_breaker,1,4)]),
  
  ### SARRANID ### - NEW TROOPS
- # GAME_MODE_EASY
- ("kingdom_6_reinforcements_a", "kingdom_6_reinforcements_a", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 12, 18), (trp_r_sarranid_yaya, 5, 12), (trp_r_sarranid_janissary, 3, 5)]),
- ("kingdom_6_reinforcements_b", "kingdom_6_reinforcements_b", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 1, 4), (trp_r_sarranid_musellem, 4, 5), (trp_r_sarranid_janissary, 4, 8), (trp_r_sarranid_timariot, 2, 5)]),
- ("kingdom_6_reinforcements_c", "kingdom_6_reinforcements_c", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi,1,4),(trp_r_sarranid_timariot,5,8),(trp_r_sarranid_musellem,4,5),(trp_r_sarranid_sipahi,0,2)]),
+ 
+ # Leifdin - 2015-08-12 - new templates to decrease overall strength of Sarranid armies
+ ("kingdom_6_reinforcements_a", "kingdom_6_reinforcements_a", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 12, 18), (trp_r_sarranid_yaya, 5, 12), (trp_r_sarranid_janissary, 1, 2)]),
+ ("kingdom_6_reinforcements_b", "kingdom_6_reinforcements_b", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 0, 1), (trp_r_sarranid_musellem, 2, 3), (trp_r_sarranid_janissary, 1, 3), (trp_r_sarranid_timariot, 1, 2),(trp_r_sarranid_yaya, 3, 5),(trp_r_sarranid_azab, 6, 8)]),
+ ("kingdom_6_reinforcements_c", "kingdom_6_reinforcements_c", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi,0,1),(trp_r_sarranid_timariot,1,2),(trp_r_sarranid_musellem,2,3),(trp_r_sarranid_janissary,2,4),(trp_r_sarranid_azab,3,5)]),
  # GAME_MODE_NORMAL
- ("kingdom_6_reinforcements_d", "kingdom_6_reinforcements_d", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 2, 5), (trp_r_sarranid_yaya, 6, 14), (trp_r_sarranid_janissary, 5, 12)]),
- ("kingdom_6_reinforcements_e", "kingdom_6_reinforcements_e", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 2, 5), (trp_r_sarranid_musellem, 4, 5), (trp_r_sarranid_janissary, 4, 8), (trp_r_sarranid_timariot, 3, 7), (trp_r_sarranid_bashibozuk, 2, 6)]),
- ("kingdom_6_reinforcements_f", "kingdom_6_reinforcements_f", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi, 3, 6), (trp_r_sarranid_timariot, 8, 12), (trp_r_sarranid_musellem, 4, 8), (trp_r_sarranid_sipahi, 1, 4), (trp_r_sarranid_garip, 1, 2)]),
+ ("kingdom_6_reinforcements_d", "kingdom_6_reinforcements_d", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 8, 14), (trp_r_sarranid_yaya, 6, 14), (trp_r_sarranid_janissary, 2, 5)]),
+ ("kingdom_6_reinforcements_e", "kingdom_6_reinforcements_e", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 0, 2), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_janissary, 2, 4), (trp_r_sarranid_timariot, 2, 2), (trp_r_sarranid_azab,4,6)]),
+ ("kingdom_6_reinforcements_f", "kingdom_6_reinforcements_f", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi, 0, 1), (trp_r_sarranid_timariot, 2, 3), (trp_r_sarranid_musellem, 3, 5), (trp_r_sarranid_janissary, 4, 6), (trp_r_sarranid_azab_2, 3, 8)]),
  # GAME_MODE_HARD
- ("kingdom_6_reinforcements_g", "kingdom_6_reinforcements_g", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 2, 5), (trp_r_sarranid_yaya, 2, 8), (trp_r_sarranid_janissary, 7, 18)]),
- ("kingdom_6_reinforcements_h", "kingdom_6_reinforcements_h", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 3, 8), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_janissary, 2, 6), (trp_r_sarranid_timariot, 5, 10), (trp_r_sarranid_bashibozuk, 4, 8), (trp_r_sarranid_sipahi, 3,5)]),
- ("kingdom_6_reinforcements_i", "kingdom_6_reinforcements_i", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi, 3, 6), (trp_r_sarranid_timariot, 2, 4), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_sipahi, 3, 6), (trp_r_sarranid_garip, 2, 4)]),
+ ("kingdom_6_reinforcements_g", "kingdom_6_reinforcements_g", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 6, 8), (trp_r_sarranid_yaya, 4, 8), (trp_r_sarranid_janissary, 12, 18)]),
+ ("kingdom_6_reinforcements_h", "kingdom_6_reinforcements_h", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 1, 4), (trp_r_sarranid_musellem, 4, 5), (trp_r_sarranid_janissary, 4, 8), (trp_r_sarranid_timariot, 3, 4), (trp_r_sarranid_bashibozuk, 4, 5), (trp_r_sarranid_sipahi, 0, 1)]),
+ ("kingdom_6_reinforcements_i", "kingdom_6_reinforcements_i", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi, 1, 1), (trp_r_sarranid_timariot, 2, 4), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_sipahi, 1, 2), (trp_r_sarranid_garip, 1, 2), (trp_r_sarranid_janissary, 5, 6)]),
  # GAME_MODE_VERY_HARD
- ("kingdom_6_reinforcements_j", "kingdom_6_reinforcements_j", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 1, 4), (trp_r_sarranid_yaya, 2, 8), (trp_r_sarranid_janissary, 12, 24)]),
- ("kingdom_6_reinforcements_k", "kingdom_6_reinforcements_k", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 6, 10), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_janissary, 2, 6), (trp_r_sarranid_timariot, 3, 5), (trp_r_sarranid_bashibozuk, 6, 10), (trp_r_sarranid_sipahi, 3,8)]),
- ("kingdom_6_reinforcements_l", "kingdom_6_reinforcements_l", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi, 5, 10), (trp_r_sarranid_timariot, 2, 4), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_sipahi, 8, 10), (trp_r_sarranid_garip, 2, 10)]),
+ ("kingdom_6_reinforcements_j", "kingdom_6_reinforcements_j", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 4, 6), (trp_r_sarranid_yaya, 2, 6), (trp_r_sarranid_janissary, 14, 22)]),
+ ("kingdom_6_reinforcements_k", "kingdom_6_reinforcements_k", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 2, 5), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_janissary, 4, 12), (trp_r_sarranid_timariot, 3, 5), (trp_r_sarranid_bashibozuk, 6, 10), (trp_r_sarranid_sipahi, 3,8)]),
+ ("kingdom_6_reinforcements_l", "kingdom_6_reinforcements_l", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi, 1, 1), (trp_r_sarranid_timariot, 3, 4), (trp_r_sarranid_musellem, 4, 4), (trp_r_sarranid_sipahi, 2, 3), (trp_r_sarranid_garip, 1, 3),(trp_r_sarranid_janissary_1, 5, 8), (trp_r_sarranid_bashibozuk,3,5)]),
+
+ # Old party templates
+ # GAME_MODE_EASY
+ #("kingdom_6_reinforcements_a", "kingdom_6_reinforcements_a", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 12, 18), (trp_r_sarranid_yaya, 5, 12), (trp_r_sarranid_janissary, 3, 5)]),
+ #("kingdom_6_reinforcements_b", "kingdom_6_reinforcements_b", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 1, 4), (trp_r_sarranid_musellem, 4, 5), (trp_r_sarranid_janissary, 4, 8), (trp_r_sarranid_timariot, 2, 5)]),
+ #("kingdom_6_reinforcements_c", "kingdom_6_reinforcements_c", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi,1,4),(trp_r_sarranid_timariot,5,8),(trp_r_sarranid_musellem,4,5),(trp_r_sarranid_sipahi,0,2)]),
+ # GAME_MODE_NORMAL
+ #("kingdom_6_reinforcements_d", "kingdom_6_reinforcements_d", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 2, 5), (trp_r_sarranid_yaya, 6, 14), (trp_r_sarranid_janissary, 5, 12)]),
+ #("kingdom_6_reinforcements_e", "kingdom_6_reinforcements_e", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 2, 5), (trp_r_sarranid_musellem, 4, 5), (trp_r_sarranid_janissary, 4, 8), (trp_r_sarranid_timariot, 3, 7), (trp_r_sarranid_bashibozuk, 2, 6)]),
+ #("kingdom_6_reinforcements_f", "kingdom_6_reinforcements_f", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi, 3, 6), (trp_r_sarranid_timariot, 8, 12), (trp_r_sarranid_musellem, 4, 8), (trp_r_sarranid_sipahi, 1, 4), (trp_r_sarranid_garip, 1, 2)]),
+ # GAME_MODE_HARD
+ #("kingdom_6_reinforcements_g", "kingdom_6_reinforcements_g", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 2, 5), (trp_r_sarranid_yaya, 2, 8), (trp_r_sarranid_janissary, 7, 18)]),
+ #("kingdom_6_reinforcements_h", "kingdom_6_reinforcements_h", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 3, 8), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_janissary, 2, 6), (trp_r_sarranid_timariot, 5, 10), (trp_r_sarranid_bashibozuk, 4, 8), (trp_r_sarranid_sipahi, 3,5)]),
+ #("kingdom_6_reinforcements_i", "kingdom_6_reinforcements_i", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi, 3, 6), (trp_r_sarranid_timariot, 2, 4), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_sipahi, 3, 6), (trp_r_sarranid_garip, 2, 4)]),
+ # GAME_MODE_VERY_HARD
+ #("kingdom_6_reinforcements_j", "kingdom_6_reinforcements_j", 0, 0, fac_commoners, 0, [(trp_r_sarranid_azab, 1, 4), (trp_r_sarranid_yaya, 2, 8), (trp_r_sarranid_janissary, 12, 24)]),
+ #("kingdom_6_reinforcements_k", "kingdom_6_reinforcements_k", 0, 0, fac_commoners, 0, [(trp_r_sarranid_corbaci, 6, 10), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_janissary, 2, 6), (trp_r_sarranid_timariot, 3, 5), (trp_r_sarranid_bashibozuk, 6, 10), (trp_r_sarranid_sipahi, 3,8)]),
+ #("kingdom_6_reinforcements_l", "kingdom_6_reinforcements_l", 0, 0, fac_commoners, 0, [(trp_r_sarranid_boluk_bashi, 5, 10), (trp_r_sarranid_timariot, 2, 4), (trp_r_sarranid_musellem, 2, 4), (trp_r_sarranid_sipahi, 8, 10), (trp_r_sarranid_garip, 2, 10)]),
  ## LEIFDIN--
  # GAME_MODE_EASY
  #("kingdom_6_reinforcements_a", "kingdom_6_reinforcements_a", 0, 0, fac_commoners, 0, [(trp_sarranid_footman,16,36),(trp_sarranid_veteran_footman,3,7)]),

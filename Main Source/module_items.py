@@ -960,7 +960,7 @@ items = [
 ["long_hafted_spiked_mace",         "Long-hafted Spiked Mace", [("mace_long_b",0)], itp_type_polearm|itp_can_knock_down|itp_merchandise| itp_primary|itp_wooden_parry, itc_staff|itcf_carry_axe_back,
  310 , weight(3)|difficulty(4)|spd_rtng(94) | weapon_length(140)|swing_damage(28 , blunt) | thrust_damage(26 ,  blunt),imodbits_mace, [], [fac_kingdom_1, fac_kingdom_2, fac_kingdom_5]],
 ## WINDYPLAINS+ ## - Remove Iron Mace's thrusting ability.  It's rather silly.; Leifdin - changed to one-handed; Windyplains - Changed it into a bastard type weapon.
-["sarranid_two_handed_mace_1",         "Balanced Mace", [("mace_long_d",0)], itp_type_two_handed_wpn|itp_can_knock_down|itp_merchandise|itp_primary|itp_crush_through|itp_unbalanced, itc_morningstar|itcf_carry_axe_back,
+["sarranid_two_handed_mace_1",         "Sarranid War Mace", [("mace_long_d",0)], itp_type_two_handed_wpn|itp_can_knock_down|itp_merchandise|itp_primary|itp_crush_through|itp_unbalanced, itc_morningstar|itcf_carry_axe_back,
 470 , weight(4.5)|difficulty(9)|spd_rtng(85) | weapon_length(95)|swing_damage(35 , blunt) | thrust_damage(22 ,  blunt),imodbits_mace, [], [fac_kingdom_6]],
 ## WINDYPLAINS- ##
 
@@ -972,10 +972,10 @@ items = [
 ["sarranid_axe_b", "Iron War Axe", [("one_handed_battle_axe_h",0)], itp_type_one_handed_wpn|itp_merchandise| itp_primary|itp_secondary|itp_bonus_against_shield|itp_wooden_parry, itc_scimitar|itcf_carry_axe_left_hip,
  540 , weight(2.0)|difficulty(9)|spd_rtng(92) | weapon_length(71)|swing_damage(30 , pierce) | thrust_damage(0 ,  pierce),imodbits_axe ],
 
-["sarranid_two_handed_axe_a",         "Sarranid Battle Axe", [("two_handed_battle_axe_g",0)], itp_type_one_handed_wpn|itp_primary|itp_bonus_against_shield|itp_unbalanced, itc_nodachi|itcf_carry_axe_back,
+["sarranid_two_handed_axe_a",         "Sarranid Battle Axe", [("two_handed_battle_axe_g",0)], itp_type_one_handed_wpn|itp_primary|itp_bonus_against_shield|itp_unbalanced, itc_longsword|itcf_carry_axe_back,
  350 , weight(3.0)|difficulty(10)|spd_rtng(94) | weapon_length(95)|swing_damage(38 , cut) | thrust_damage(0 ,  pierce),imodbits_axe, [], [fac_kingdom_6]],
 # Leifdin - dmg cutting -> piercing
-["sarranid_two_handed_axe_b",         "Sarranid War Axe", [("two_handed_battle_axe_h",0)], itp_type_one_handed_wpn|itp_primary|itp_bonus_against_shield|itp_unbalanced, itc_nodachi|itcf_carry_axe_back,
+["sarranid_two_handed_axe_b",         "Sarranid War Axe", [("two_handed_battle_axe_h",0)], itp_type_one_handed_wpn|itp_primary|itp_secondary|itp_bonus_against_shield|itp_unbalanced, itc_longsword|itcf_carry_axe_back,
  280 , weight(2.50)|difficulty(10)|spd_rtng(90) | weapon_length(90)|swing_damage(35 , pierce) | thrust_damage(0 ,  pierce),imodbits_axe, [], [fac_kingdom_6]],
 
 
@@ -1002,12 +1002,12 @@ items = [
  384 , weight(4.5)|difficulty(13)|spd_rtng(77) | weapon_length(180)|swing_damage(50 , cut) | thrust_damage(15 ,  blunt),imodbits_polearm, [], [fac_kingdom_1]],
 ["polehammer",         "Polehammer", [("pole_hammer",0)], itp_type_polearm|itp_offset_lance| itp_primary|itp_two_handed|itp_wooden_parry, itc_staff,
  169 , weight(7)|difficulty(18)|spd_rtng(50) | weapon_length(126)|swing_damage(50 , blunt) | thrust_damage(35 ,  blunt),imodbits_polearm ],
-["staff",         "Staff", [("wooden_staff",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_penalty_with_shield|itp_wooden_parry|itp_wooden_attack, itc_staff|itcf_carry_sword_back,
- 36 , weight(1.5)|difficulty(2)|spd_rtng(100) | weapon_length(130)|swing_damage(18 , blunt) | thrust_damage(19 ,  blunt),imodbits_polearm ],
-["quarter_staff", "Quarter Staff", [("quarter_staff",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_wooden_parry|itp_wooden_attack, itc_staff|itcf_carry_sword_back,
- 60 , weight(2)|difficulty(3)|spd_rtng(104) | weapon_length(140)|swing_damage(20 , blunt) | thrust_damage(20 ,  blunt),imodbits_polearm ],
-["iron_staff",         "Iron Staff", [("iron_staff",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary, itc_staff|itcf_carry_sword_back,
- 202 , weight(2.8)|difficulty(4)|spd_rtng(97) | weapon_length(140)|swing_damage(25 , blunt) | thrust_damage(26 ,  blunt),imodbits_polearm ],
+["staff",         "Staff", [("wooden_staff",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_penalty_with_shield|itp_wooden_parry|itp_wooden_attack, itc_staff|itcf_horseback_slashright_onehanded|itcf_carry_sword_back,
+ 36 , weight(1.5)|difficulty(2)|spd_rtng(104) | weapon_length(130)|swing_damage(18 , blunt) | thrust_damage(19 ,  blunt),imodbits_polearm ],
+["quarter_staff", "Quarter Staff", [("quarter_staff",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_wooden_parry|itp_wooden_attack, itc_staff|itcf_horseback_slashright_onehanded|itcf_carry_sword_back,
+ 60 , weight(2)|difficulty(3)|spd_rtng(100) | weapon_length(140)|swing_damage(25 , blunt) | thrust_damage(20 ,  blunt),imodbits_polearm ],
+["iron_staff",         "Iron Staff", [("iron_staff",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary, itc_staff|itcf_horseback_slashright_onehanded|itcf_carry_sword_back,
+ 202 , weight(2.8)|difficulty(4)|spd_rtng(95) | weapon_length(140)|swing_damage(28 , blunt) | thrust_damage(26 ,  blunt),imodbits_polearm ],
 
 #["glaive_b",         "Glaive_b", [("glaive_b",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_two_handed|itp_wooden_parry, itc_staff|itcf_carry_spear,
 # 352 , weight(4.5)|difficulty(0)|spd_rtng(83) | weapon_length(157)|swing_damage(38 , cut) | thrust_damage(21 ,  pierce),imodbits_polearm ],
@@ -1047,14 +1047,15 @@ items = [
 ## 150 , weight(4.5)|difficulty(0)|spd_rtng(81) | weapon_length(225)|swing_damage(19 , blunt) | thrust_damage(23 ,  pierce),imodbits_polearm ],
 ["ashwood_pike", "Ashwood Pike", [("pike",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_two_handed|itp_wooden_parry, itc_cutting_spear,
  205 , weight(3.5)|difficulty(9)|spd_rtng(90) | weapon_length(170)|swing_damage(19 , blunt) | thrust_damage(29,  pierce),imodbits_polearm, [], [fac_kingdom_2]],
-["awlpike",    "Awlpike", [("awl_pike_b",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_penalty_with_shield|itp_wooden_parry, itc_cutting_spear|itcf_carry_spear,
- 345 , weight(2.25)|difficulty(3)|spd_rtng(92) | weapon_length(165)|swing_damage(20 , blunt) | thrust_damage(33 ,  pierce),imodbits_polearm, [], [fac_kingdom_1, fac_kingdom_5]],
-["awlpike_long",  "Long Awlpike", [("awl_pike_a",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_penalty_with_shield|itp_wooden_parry, itc_cutting_spear|itcf_carry_spear,
- 385 , weight(2.25)|difficulty(3)|spd_rtng(89) | weapon_length(185)|swing_damage(20 , blunt) | thrust_damage(32 ,  pierce),imodbits_polearm, [], [fac_kingdom_5]],
+#Leifdin - increased stats of awlpikes
+["awlpike",    "Awlpike", [("awl_pike_b",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_two_handed|itp_wooden_parry, itcf_carry_spear,
+ 345 , weight(2.25)|difficulty(3)|spd_rtng(94) | weapon_length(165)|swing_damage(25 , blunt) | thrust_damage(38 ,  pierce),imodbits_polearm, [], [fac_kingdom_1, fac_kingdom_5]],
+["awlpike_long",  "Long Awlpike", [("awl_pike_a",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_two_handed|itp_wooden_parry, itc_cutting_spear| itcf_carry_spear,
+ 385 , weight(2.25)|difficulty(3)|spd_rtng(91) | weapon_length(185)|swing_damage(30 , blunt) | thrust_damage(46 ,  pierce),imodbits_polearm, [], [fac_kingdom_5]],
 #["awlpike",         "Awlpike", [("pike",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_two_handed|itp_wooden_parry, itc_cutting_spear|itcf_carry_spear,
 # 378 , weight(3.5)|difficulty(12)|spd_rtng(92) | weapon_length(160)|swing_damage(20 ,blunt) | thrust_damage(31 ,  pierce),imodbits_polearm ],
 # Leifdin - speed 81 -> 91 and length 120 > 135
-["bec_de_corbin_a",  "War Hammer", [("bec_de_corbin_a",0)], itp_type_polearm|itp_merchandise| itp_cant_use_on_horseback|itp_primary|itp_penalty_with_shield|itp_wooden_parry|itp_two_handed, itc_cutting_spear|itcf_carry_spear,
+["bec_de_corbin_a",  "War Hammer", [("bec_de_corbin_a",0)], itp_type_polearm|itp_merchandise| itp_cant_use_on_horseback|itp_primary|itp_penalty_with_shield|itp_wooden_parry|itp_two_handed,itcf_carry_spear,
  125 , weight(3.0)|difficulty(4)|spd_rtng(91) | weapon_length(135)|swing_damage(38, blunt) | thrust_damage(38 ,  pierce),imodbits_polearm ],
 
 
@@ -1069,14 +1070,14 @@ items = [
 ["leather_covered_round_shield", 	"Leather Covered Round Shield", [("shield_round_d",0)], itp_merchandise|itp_type_shield|itp_wooden_parry, itcf_carry_round_shield,  80 , weight(2.5)|hit_points(360)|body_armor(11)|spd_rtng(96)|shield_width(40),imodbits_shield ],
 ["hide_covered_round_shield", 		"Hide Covered Round Shield", [("shield_round_f",0)], itp_merchandise|itp_type_shield|itp_wooden_parry, itcf_carry_round_shield,  40 , weight(2)|hit_points(330)|body_armor(10)|spd_rtng(100)|shield_width(40),imodbits_shield ],
 ["shield_heater_c", 				"Heater Shield", [("shield_heater_c",0)], itp_merchandise|itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  277 , weight(3.5)|hit_points(340)|body_armor(10)|spd_rtng(80)|shield_width(50),imodbits_shield ],
-["norman_shield_1",         		"Kite Shield", [("norman_shield_1",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(340)|body_armor(10)|spd_rtng(82)|shield_width(90),imodbits_shield ],
-["norman_shield_2",         		"Kite Shield", [("norman_shield_2",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(340)|body_armor(10)|spd_rtng(82)|shield_width(90),imodbits_shield ],
-["norman_shield_3",         		"Kite Shield", [("norman_shield_3",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(340)|body_armor(10)|spd_rtng(82)|shield_width(90),imodbits_shield ],
-["norman_shield_4",         		"Kite Shield", [("norman_shield_4",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(340)|body_armor(10)|spd_rtng(82)|shield_width(90),imodbits_shield ],
-["norman_shield_5",         		"Kite Shield", [("norman_shield_5",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(340)|body_armor(10)|spd_rtng(82)|shield_width(90),imodbits_shield ],
-["norman_shield_6",         		"Kite Shield", [("norman_shield_6",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(340)|body_armor(10)|spd_rtng(82)|shield_width(90),imodbits_shield ],
-["norman_shield_7",         		"Kite Shield", [("norman_shield_7",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(340)|body_armor(10)|spd_rtng(82)|shield_width(90),imodbits_shield ],
-["norman_shield_8",         		"Kite Shield", [("norman_shield_8",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(340)|body_armor(10)|spd_rtng(82)|shield_width(90),imodbits_shield ],
+["norman_shield_1",         		"Kite Shield", [("norman_shield_1",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(280)|body_armor(8)|spd_rtng(82)|shield_width(90),imodbits_shield ],
+["norman_shield_2",         		"Kite Shield", [("norman_shield_2",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(280)|body_armor(8)|spd_rtng(82)|shield_width(90),imodbits_shield ],
+["norman_shield_3",         		"Kite Shield", [("norman_shield_3",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(280)|body_armor(8)|spd_rtng(82)|shield_width(90),imodbits_shield ],
+["norman_shield_4",         		"Kite Shield", [("norman_shield_4",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(280)|body_armor(8)|spd_rtng(82)|shield_width(90),imodbits_shield ],
+["norman_shield_5",         		"Kite Shield", [("norman_shield_5",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(280)|body_armor(8)|spd_rtng(82)|shield_width(90),imodbits_shield ],
+["norman_shield_6",         		"Kite Shield", [("norman_shield_6",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(280)|body_armor(8)|spd_rtng(82)|shield_width(90),imodbits_shield ],
+["norman_shield_7",         		"Kite Shield", [("norman_shield_7",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(280)|body_armor(8)|spd_rtng(82)|shield_width(90),imodbits_shield ],
+["norman_shield_8",         		"Kite Shield", [("norman_shield_8",0)], itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(280)|body_armor(8)|spd_rtng(82)|shield_width(90),imodbits_shield ],
 ["tab_shield_round_a", 				"Old Round Shield", [("tableau_shield_round_5",0)], itp_merchandise|itp_type_shield|itp_wooden_parry, itcf_carry_round_shield, 26 , weight(2.5)|hit_points(200)|body_armor(6)|spd_rtng(93)|shield_width(50),imodbits_shield, [(ti_on_init_item, [(store_trigger_param_1, ":agent_no"),(store_trigger_param_2, ":troop_no"),(call_script, "script_shield_item_set_banner", "tableau_round_shield_5", ":agent_no", ":troop_no")])]],
 ["tab_shield_round_b", 				"Plain Round Shield", [("tableau_shield_round_3",0)], itp_merchandise|itp_type_shield|itp_wooden_parry, itcf_carry_round_shield, 65 , weight(3)|hit_points(260)|body_armor(8)|spd_rtng(90)|shield_width(50),imodbits_shield, [(ti_on_init_item, [(store_trigger_param_1, ":agent_no"),(store_trigger_param_2, ":troop_no"),(call_script, "script_shield_item_set_banner", "tableau_round_shield_3", ":agent_no", ":troop_no")])]],
 ["tab_shield_round_c", 				"Round Shield", [("tableau_shield_round_2",0)], itp_merchandise|itp_type_shield|itp_wooden_parry, itcf_carry_round_shield, 105 , weight(3.5)|hit_points(310)|body_armor(9)|spd_rtng(87)|shield_width(50),imodbits_shield, [(ti_on_init_item, [(store_trigger_param_1, ":agent_no"),(store_trigger_param_2, ":troop_no"),(call_script, "script_shield_item_set_banner","tableau_round_shield_2", ":agent_no", ":troop_no")])]],
@@ -1211,16 +1212,18 @@ items = [
 437 , weight(1.25)|difficulty(3)|spd_rtng(88) | shoot_speed(60) | thrust_damage(23 ,pierce),imodbit_cracked | imodbit_bent | imodbit_masterwork ],
 ["war_bow",         "War Bow", [("war_bow",0),("war_bow_carry",ixmesh_carry)],itp_type_bow|itp_merchandise|itp_primary|itp_two_handed ,itcf_shoot_bow|itcf_carry_bow_back, 
 728 , weight(1.5)|difficulty(4)|spd_rtng(84) | shoot_speed(65) | thrust_damage(26 ,pierce),imodbits_bow ],
+#Leifdin - increased shot speed of crossbows by ~12
 ["hunting_crossbow", "Hunting Crossbow", [("crossbow_a",0)], itp_type_crossbow |itp_merchandise|itp_primary|itp_two_handed ,itcf_shoot_crossbow|itcf_carry_crossbow_back, 
-22 , weight(2.25)|difficulty(2)|spd_rtng(47) | shoot_speed(50) | thrust_damage(37 ,  pierce)|max_ammo(1),imodbits_crossbow ],
+22 , weight(2.25)|difficulty(2)|spd_rtng(47) | shoot_speed(62) | thrust_damage(37 ,  pierce)|max_ammo(1),imodbits_crossbow ],
 ["light_crossbow", "Light Crossbow", [("crossbow_b",0)], itp_type_crossbow |itp_merchandise|itp_primary|itp_two_handed ,itcf_shoot_crossbow|itcf_carry_crossbow_back, 
-67 , weight(2.5)|difficulty(3)|spd_rtng(45) | shoot_speed(59) | thrust_damage(44 ,  pierce)|max_ammo(1),imodbits_crossbow ],
+67 , weight(2.5)|difficulty(3)|spd_rtng(45) | shoot_speed(70) | thrust_damage(44 ,  pierce)|max_ammo(1),imodbits_crossbow ],
 ["crossbow",         "Crossbow",         [("crossbow_a",0)], itp_type_crossbow |itp_merchandise|itp_primary|itp_two_handed|itp_cant_reload_on_horseback ,itcf_shoot_crossbow|itcf_carry_crossbow_back, 
-182 , weight(3)|difficulty(3)|spd_rtng(43) | shoot_speed(66) | thrust_damage(49,pierce)|max_ammo(1),imodbits_crossbow ],
+182 , weight(3)|difficulty(3)|spd_rtng(43) | shoot_speed(78) | thrust_damage(49,pierce)|max_ammo(1),imodbits_crossbow ],
 ["heavy_crossbow", "Heavy Crossbow", [("crossbow_c",0)], itp_type_crossbow |itp_merchandise|itp_primary|itp_two_handed|itp_cant_reload_on_horseback ,itcf_shoot_crossbow|itcf_carry_crossbow_back, 
-349 , weight(3.5)|difficulty(5)|spd_rtng(41) | shoot_speed(70) | thrust_damage(58 ,pierce)|max_ammo(1),imodbits_crossbow ],
+349 , weight(3.5)|difficulty(5)|spd_rtng(41) | shoot_speed(82) | thrust_damage(58 ,pierce)|max_ammo(1),imodbits_crossbow ],
+#Leifdin - improved shot speed to 90 to test what will happen
 ["sniper_crossbow", "Siege Crossbow", [("crossbow_c",0)], itp_type_crossbow |itp_merchandise|itp_primary|itp_two_handed|itp_cant_reload_on_horseback ,itcf_shoot_crossbow|itcf_carry_crossbow_back, 
-683 , weight(3.75)|difficulty(10)|spd_rtng(37) | shoot_speed(77) | thrust_damage(63 ,pierce)|max_ammo(1),imodbits_crossbow ],
+683 , weight(3.75)|difficulty(10)|spd_rtng(37) | shoot_speed(90) | thrust_damage(63 ,pierce)|max_ammo(1),imodbits_crossbow ],
 ["flintlock_pistol", "Flintlock Pistol", [("flintlock_pistol",0)], itp_type_pistol |itp_merchandise|itp_primary ,itcf_shoot_pistol|itcf_reload_pistol, 1230 , weight(1.5)|difficulty(0)|spd_rtng(38) | shoot_speed(160) | thrust_damage(45 ,pierce)|max_ammo(1)|accuracy(75),imodbits_none,
  [(ti_on_weapon_attack, [(play_sound,"snd_pistol_shot"),(position_move_x, pos1,27),(position_move_y, pos1,36),(particle_system_burst, "psys_pistol_smoke", pos1, 15)])]],
 ["torch",         "Torch", [("club",0)], itp_type_one_handed_wpn|itp_primary, itc_scimitar, 11 , weight(2.5)|difficulty(0)|spd_rtng(95) | weapon_length(95)|swing_damage(11 , blunt) | thrust_damage(0 ,  pierce),imodbits_none,
@@ -1283,8 +1286,8 @@ items = [
  [(ti_on_init_item, [(store_trigger_param_1, ":agent_no"),(store_trigger_param_2, ":troop_no"),(call_script, "script_shield_item_set_banner", "tableau_heraldic_armor_a", ":agent_no", ":troop_no")])]],
 ["mail_boots_for_tableau", "Mail Boots", [("mail_boots_a",0)], itp_type_foot_armor | itp_attach_armature  ,0,
  400, weight(2.3)|abundance(100)|head_armor(0)|body_armor(0)|leg_armor(21)|difficulty(0) ,imodbits_armor ],
-["warhorse_sarranid","Sarranian War Horse", [("warhorse_sarranid",0)], itp_merchandise|itp_type_horse, 0, 1811,abundance(40)|hit_points(165)|body_armor(58)|difficulty(0)|horse_speed(40)|horse_maneuver(44)|horse_charge(32)|horse_scale(112),imodbits_horse_basic|imodbit_champion, [], [fac_kingdom_6]],
-["warhorse_steppe","Steppe Charger", [("warhorse_steppe",0)], itp_merchandise|itp_type_horse, 0, 1400,abundance(45)|hit_points(150)|body_armor(40)|difficulty(0)|horse_speed(40)|horse_maneuver(50)|horse_charge(28)|horse_scale(112),imodbits_horse_basic|imodbit_champion, [], [fac_kingdom_3,fac_kingdom_2]],
+["warhorse_sarranid","Sarranian War Horse", [("warhorse_sarranid",0)], itp_merchandise|itp_type_horse, 0, 1811,abundance(40)|hit_points(165)|body_armor(58)|difficulty(4)|horse_speed(40)|horse_maneuver(44)|horse_charge(32)|horse_scale(112),imodbits_horse_basic|imodbit_champion, [], [fac_kingdom_6]],
+["warhorse_steppe","Steppe Charger", [("warhorse_steppe",0)], itp_merchandise|itp_type_horse, 0, 1400,abundance(45)|hit_points(150)|body_armor(40)|difficulty(4)|horse_speed(40)|horse_maneuver(50)|horse_charge(28)|horse_scale(112),imodbits_horse_basic|imodbit_champion, [], [fac_kingdom_3,fac_kingdom_2]],
 # Added Items
 ["plate_heraldic", "Heraldic Heavy Mail and Plate", [("plate_heraldic",0)], itp_merchandise|itp_type_body_armor|itp_covers_legs,0,2430,weight(21)|abundance(50)|head_armor(0)|body_armor(51)|leg_armor(20)|difficulty(0),imodbits_plate,[(ti_on_init_item, [(store_trigger_param_1, ":agent_no"),(store_trigger_param_2, ":troop_no"),(call_script, "script_shield_item_set_banner", "tableau_heraldic_armor_plate", ":agent_no", ":troop_no")])],[fac_player_faction]],
 
@@ -1749,8 +1752,8 @@ items = [
  357 , weight(1.8)|difficulty(3)|spd_rtng(102) | weapon_length(62)|swing_damage(29 , pierce) | thrust_damage(0 ,  pierce),imodbits_axe, [], [fac_kingdom_4]], 
 ["mod_cavalry_axe1", "Cavalry Axe", [("bb_slavic_cavalry_axe_1",0)], itp_type_one_handed_wpn|itp_merchandise| itp_primary|itp_secondary|itp_bonus_against_shield|itp_wooden_parry, itc_scimitar|itcf_carry_axe_left_hip, 
  457 , weight(1.9)|difficulty(4)|spd_rtng(101) | weapon_length(75)|swing_damage(32 , pierce) | thrust_damage(0 ,  pierce),imodbits_axe ], 
-# Leifdin - speed 90 > 105, name "vaegiran pike" -> "heavy pike"
-["mod_pike1", "Heavy Pike", [("bb_rus_pike",0)], itp_couchable|itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_wooden_parry, itc_staff, 
+# Leifdin - speed 90 > 105, name "vaegiran pike" -> "heavy pike", can't be used with shield nor on horseback
+["mod_pike1", "Heavy Pike", [("bb_rus_pike",0)], itp_type_polearm|itp_cant_use_on_horseback|itp_offset_lance|itp_merchandise|itp_primary|itp_two_handed|itp_wooden_parry|itp_cant_use_on_horseback, itc_staff, 
  582 , weight(4.5)|difficulty(7)|spd_rtng(105) | weapon_length(250)|swing_damage(21, cut) | thrust_damage(22 ,  pierce),imodbits_polearm, [], [fac_kingdom_2]], 
 ["mod_lance2", "Vaegiran Lance", [("bb_rus_lance",0)], itp_couchable|itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_wooden_parry, itc_staff, 
  475 , weight(4.0)|difficulty(6)|spd_rtng(91) | weapon_length(189)|swing_damage(21, cut) | thrust_damage(21 ,  pierce),imodbits_polearm, [], [fac_kingdom_2]], 
@@ -1763,7 +1766,7 @@ items = [
 
 
  ##THE NEW SWORD OF STAG - only changes are the mesh and weapon length & dropped speed -1 - changed length from 115 to 118 to accompany new mesh  
-["mod_stag_sword1",  "Sword of The Stag", [("faradon_twohanded2",0)], itp_crush_through|itp_unbalanced|itp_type_two_handed_wpn|itp_bonus_against_shield|itp_can_knock_down|itp_merchandise| itp_two_handed|itp_primary, itc_greatsword|itcf_carry_sword_back,
+["mod_stag_sword1",  "Sword of The Stag", [("faradon_twohanded2",0)], itp_crush_through|itp_unbalanced|itp_type_two_handed_wpn|itp_bonus_against_shield|itp_can_knock_down|itp_merchandise| itp_cant_use_on_horseback|itp_primary, itc_greatsword|itcf_carry_sword_back,
  1970 , weight(3.95)|difficulty(15)|spd_rtng(87) | weapon_length(118)|swing_damage(41 , cut) | thrust_damage(28 ,  pierce),imodbits_sword_high, [], [fac_player_supporters_faction]], 
 
 #RANGED - New crossbows to be added later - Dawg
@@ -1917,11 +1920,11 @@ items = [
 ["faradon_warhammer",  "Exiled Warhammer", [("faradon_warhammer",0)],  itp_type_one_handed_wpn|itp_merchandise|itp_can_knock_down|itp_primary|itp_wooden_parry, itc_longsword|itcf_carry_sword_left_hip,
  200 , weight(1.5)|difficulty(3)|spd_rtng(115) | weapon_length(73)|swing_damage(25 , blunt) | thrust_damage(17 ,  pierce),imodbits_mace ],
 ["faradon_mace",  "War Mace", [("faradon_iberianmace",0)],  itp_type_one_handed_wpn|itp_merchandise|itp_can_knock_down|itp_primary|itp_wooden_parry, itc_longsword|itcf_carry_sword_left_hip,
- 200 , weight(1.4)|difficulty(3)|spd_rtng(114) | weapon_length(66)|swing_damage(25 , blunt) ,imodbits_mace ],
+ 200 , weight(1.4)|difficulty(3)|spd_rtng(114) | weapon_length(66)|swing_damage(25 , blunt)| thrust_damage(15, pierce) ,imodbits_mace ],
 ["faradon_club",  "War Club", [("faradon_largeclub",0)],  itp_type_one_handed_wpn|itp_merchandise|itp_primary|itp_wooden_parry, itc_longsword|itcf_carry_sword_left_hip,
- 200 , weight(1.3)|difficulty(3)|spd_rtng(115) | weapon_length(87)|swing_damage(24 , blunt) ,imodbits_mace ], 
+ 200 , weight(1.3)|difficulty(3)|spd_rtng(115) | weapon_length(87)|swing_damage(24 , blunt)| thrust_damage(18, blunt) ,imodbits_mace ], 
 ["faradon_iron_club",  "Iron War Club", [("faradon_ironclub",0)], itp_type_one_handed_wpn|itp_merchandise|itp_primary, itc_longsword|itcf_carry_sword_left_hip, 
- 558 , weight(1.3)|difficulty(2)|spd_rtng(105) | weapon_length(85)|swing_damage(30 , blunt) ,imodbits_sword_high ],   
+ 558 , weight(1.3)|difficulty(2)|spd_rtng(105) | weapon_length(85)|swing_damage(30 , blunt)| thrust_damage(24, blunt) ,imodbits_sword_high ],   
  
 
 ##NEW HORSES - been reworked - 
@@ -2025,7 +2028,7 @@ items = [
 
 ["highlander_dirk", 				"Highlander Dirk",					[("dirk",0),("dirk_scabbard", ixmesh_carry)], itp_type_one_handed_wpn|itp_primary, itc_dagger|itcf_carry_dagger_front_right|itcf_show_holster_when_drawn, 183, weight(1.25)|difficulty(6)|spd_rtng(103)|weapon_length(75)|swing_damage(25 , cut)|thrust_damage(19, pierce),imodbits_sword, [], [fac_kingdom_5]],
 ["highlander_claymore", 			"Highlander Claymore", 				[("2h_claymore",0)], itp_type_two_handed_wpn|itp_merchandise|itp_primary, itc_bastardsword|itcf_carry_sword_back, 294, weight(2.0)|difficulty(13)|spd_rtng(98)|weapon_length(101)|swing_damage(47, cut)|thrust_damage(42 , pierce),imodbits_sword_high, [], [fac_kingdom_5]],
-["highlader_broadsword", 			"Highlander Broadsword", 			[("highlad_broadsword",0),("highlad_broadsword_scabbard", ixmesh_carry)], itp_type_one_handed_wpn|itp_merchandise|itp_primary, itc_longsword|itcf_carry_sword_left_hip|itcf_show_holster_when_drawn, 163, weight(1.5)|difficulty(0)|spd_rtng(99)|weapon_length(95)|swing_damage(38, cut)|thrust_damage(32, pierce),imodbits_sword_high, [], [fac_kingdom_5]],
+["highlader_broadsword", 			"Broadsword", 						[("highlad_broadsword",0),("highlad_broadsword_scabbard", ixmesh_carry)], itp_type_one_handed_wpn|itp_merchandise|itp_primary, itc_longsword|itcf_carry_sword_left_hip|itcf_show_holster_when_drawn, 163, weight(1.5)|difficulty(0)|spd_rtng(99)|weapon_length(95)|swing_damage(38, cut)|thrust_damage(32, pierce),imodbits_sword_high, [], ],
 
 #Jan Tuma's Sturmhaube
 
@@ -2113,7 +2116,7 @@ items = [
 
 #Narf's Plate armour pack
 ["flamberge_b",         			"Flamberge Zweihander", 			[("flamberge",0)], itp_type_two_handed_wpn|itp_merchandise|itp_always_loot|itp_two_handed|itp_next_item_as_melee|itp_primary, itc_staff|itcf_carry_sword_back, 1123 , weight(3.75)|difficulty(11)|spd_rtng(95) | weapon_length(135)|swing_damage(42, cut) | thrust_damage(56 ,  pierce),imodbits_sword_high ],
-["flamberge_b_alt",         		"Flamberge Zweihander", 			[("flamberge",0)], itp_type_two_handed_wpn|itp_merchandise|itp_always_loot|itp_two_handed|itp_primary, itc_greatsword|itcf_carry_sword_back, 1123 , weight(3.75)|difficulty(11)|spd_rtng(77) | weapon_length(145)|swing_damage(50, cut) | thrust_damage(28 ,  pierce),imodbits_sword_high ],
+["flamberge_b_alt",         		"Flamberge Zweihander", 			[("flamberge",0)], itp_type_polearm|itp_merchandise|itp_always_loot|itp_two_handed|itp_primary, itc_staff|itcf_carry_sword_back, 1123 , weight(3.75)|difficulty(11)|spd_rtng(77) | weapon_length(145)|swing_damage(50, cut) | thrust_damage(28 ,  pierce),imodbits_sword_high ],
 ["chapel-de-fer", 					"Chapel-de-Fer", 					[("chapel-de-fer",0)], itp_merchandise| itp_type_head_armor,0, 293 , weight(1.5)|abundance(100)|head_armor(40)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_plate, [], [fac_kingdom_5]],
 ["bear_paw_shoes", 					"Bear Paw Shoes", 					[("bear_paw_shoes",0)], itp_merchandise| itp_type_foot_armor |itp_civilian  | itp_attach_armature,0, 150 , weight(1)|abundance(1000)|head_armor(0)|body_armor(0)|leg_armor(5)|difficulty(0) ,imodbits_cloth ], 
 ["visored_sallet", 					"Visored Sallet", 					[("visored_salet",0)], itp_merchandise| itp_type_head_armor   ,0, 638 , weight(2)|abundance(100)|head_armor(48)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_plate, [], [fac_kingdom_5]],

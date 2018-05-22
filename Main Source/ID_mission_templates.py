@@ -52,3 +52,4 @@ mt_tpe_tournament_native_gear = 50
 mt_odval_challenge = 51
 mt_edwyn_town_fight = 52
 mt_edwyn_village_fight = 53
+mt_oathbound_army_training = 54

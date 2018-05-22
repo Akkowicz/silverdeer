@@ -977,27 +977,27 @@ scripts = [
         (party_set_note_available, ":party_no", 1),
       (try_end),
 	  
-		## WINDYPLAINS+ ## - Set NPC Lords to use Heraldic Horses
-		(try_for_range, ":troop_no", active_npcs_begin, active_npcs_end),
-			(neg|is_between, ":troop_no", companions_begin, companions_end),
-			(store_troop_faction, ":faction_no", ":troop_no"),
-			(try_begin),
-				(eq, ":faction_no", "fac_kingdom_6"),
-				(troop_set_inventory_slot, ":troop_no", ek_horse, "itm_wse_warhorse_sarranid"),
-			(else_try),
-				(eq, ":faction_no", "fac_kingdom_3"),
-				(troop_set_inventory_slot, ":troop_no", ek_horse, "itm_wse_warhorse_steppe"),
-			(else_try),
-				(eq, ":faction_no", "fac_kingdom_4"), # Nords receive no horse.
-				(troop_set_inventory_slot, ":troop_no", ek_horse, -1),
-			(else_try),
-				(eq, ":faction_no", "fac_kingdom_5"), # Rhodoks receive no horse.
-				(troop_set_inventory_slot, ":troop_no", ek_horse, -1),
-			(else_try),
-				(troop_set_inventory_slot, ":troop_no", ek_horse, "itm_wse_warhorse"),
-			(try_end),
-		(try_end),
-		## WINDYPLAINS- ##
+		# ## WINDYPLAINS+ ## - Set NPC Lords to use Heraldic Horses
+		# (try_for_range, ":troop_no", active_npcs_begin, active_npcs_end),
+			# (neg|is_between, ":troop_no", companions_begin, companions_end),
+			# (store_troop_faction, ":faction_no", ":troop_no"),
+			# (try_begin),
+				# (eq, ":faction_no", "fac_kingdom_6"),
+				# (troop_set_inventory_slot, ":troop_no", ek_horse, "itm_wse_warhorse_sarranid"),
+			# (else_try),
+				# (eq, ":faction_no", "fac_kingdom_3"),
+				# (troop_set_inventory_slot, ":troop_no", ek_horse, "itm_wse_warhorse_steppe"),
+			# (else_try),
+				# (eq, ":faction_no", "fac_kingdom_4"), # Nords receive no horse.
+				# (troop_set_inventory_slot, ":troop_no", ek_horse, -1),
+			# (else_try),
+				# (eq, ":faction_no", "fac_kingdom_5"), # Rhodoks receive no horse.
+				# (troop_set_inventory_slot, ":troop_no", ek_horse, -1),
+			# (else_try),
+				# (troop_set_inventory_slot, ":troop_no", ek_horse, "itm_wse_warhorse"),
+			# (try_end),
+		# (try_end),
+		# ## WINDYPLAINS- ##
 		
 		## WINDYPLAINS+ ## - Setting up defaults.
 		(call_script, "script_hub_initialize"), # Setup default buying prices for troops.
@@ -4296,28 +4296,50 @@ scripts = [
 	    (troop_get_slot, ":wage", ":troop_id", slot_troop_purchase_cost),
 		(val_mul, ":wage", 8),
 		(val_div, ":wage", 100),
-        # (store_character_level, ":troop_level", ":troop_id"),
-        # (assign, ":wage", ":troop_level"),
-        # (val_add, ":wage", 3),
-        # (val_mul, ":wage", ":wage"),
-        # (val_div, ":wage", 25),
       (try_end),
-
-      # (try_begin), #mounted troops cost 65% more than the normal cost
-        # (neg|is_between, ":troop_id", companions_begin, companions_end),
-        # (troop_is_mounted, ":troop_id"),
-        # (val_mul, ":wage", 5),
-        # (val_div, ":wage", 3),
-      # (try_end),
+	  
+	  (assign, ":wage_factor", 0),
+	  (str_clear, s31), # Used for debugging.
+	  ## TROOP CIRCUMSTANCE: Mercenaries cost 50% more than normal.
+      (try_begin),
+		(troop_slot_eq, ":troop_id", slot_troop_recruit_type, STRT_MERCENARY),
+		(val_add, ":wage_factor", 50),
+		(str_store_string, s31, "@{s31} +50%"),
+      (try_end),
+	  
+	  ## TROOP EFFECT: PREREQ_HIGH_UPKEEP - Increases the weekly wage of a troop.
+	  (try_begin),
+		(call_script, "script_cf_ce_troop_has_ability", ":troop_id", PREREQ_HIGH_UPKEEP),
+		(val_add, ":wage_factor", CE_PREREQ_HIGH_UPKEEP_PENALTY),
+		(assign, reg31, CE_PREREQ_HIGH_UPKEEP_PENALTY),
+		(str_store_string, s31, "@{s31} +{reg31}%"),
+	  (try_end),
+	  
+	  ## TROOP EFFECT: BONUS_DEVOTED - Increases the weekly wage of a troop.
+	  (try_begin),
+		(call_script, "script_cf_ce_troop_has_ability", ":troop_id", BONUS_DEVOTED),
+		(val_sub, ":wage_factor", CE_ABILITY_DEVOTED_DISCOUNT),
+		(assign, reg31, CE_ABILITY_DEVOTED_DISCOUNT),
+		(str_store_string, s31, "@{s31} -{reg31}%"),
+	  (try_end),
+	  
+	  ## Apply Wage Factor
+	  (try_begin),
+		(neq, ":wage_factor", 0),
+		(store_mul, ":wage_change", ":wage", ":wage_factor"),
+		(val_div, ":wage_change", 100),
+		(val_add, ":wage", ":wage_change"),
+		(try_begin), ### DIAGNOSTIC+ ###
+			(ge, DEBUG_RECRUITMENT, 1),
+			(assign, reg31, ":wage_factor"),
+			(store_sub, reg32, ":wage", ":wage_change"),
+			(assign, reg33, ":wage"),
+			(str_store_troop_name, s32, ":troop_id"),
+			(display_message, "@DEBUG (Recruitment): Cost factors on {s32} are {reg31}%.  Factors = {s31}", gpu_debug),
+			(display_message, "@DEBUG (Recruitment): {s32} cost changed from {reg32} to {reg33} denars.", gpu_debug),
+		(try_end), ### DIAGNOSTIC- ###
+	  (try_end),
 	  ## WINDYPLAINS- ##
-      (try_begin), #mercenaries cost %50 more than the normal cost
-		## WINDYPLAINS+ ## - Mercenaries cost 50% more than the normal cost.
-	    (troop_slot_eq, ":troop_id", slot_troop_recruit_type, STRT_MERCENARY),
-        # (is_between, ":troop_id", mercenary_troops_begin, mercenary_troops_end),
-		## WINDYPLAINS- ##
-        (val_mul, ":wage", 3),
-        (val_div, ":wage", 2),
-      (try_end),
 	  
       (try_begin),
         (is_between, ":troop_id", companions_begin, companions_end),
@@ -24332,7 +24354,7 @@ scripts = [
 		
 		### DIAGNOSTIC+ ###
 		(try_begin),
-			(ge, BETA_TESTING_MODE, 1),
+			(ge, BETA_TESTING_MODE, 2),
 			(party_is_active, ":enemy_party"),
 			(party_stack_get_troop_id, ":troop_no", ":enemy_party", 0),
 			(str_store_troop_name, s1, ":troop_no"),
@@ -25925,12 +25947,16 @@ scripts = [
 		   (store_faction_of_troop, ":player_betrothed_faction", ":player_betrothed"),
 		   (eq, ":player_betrothed_faction", ":faction_no"),
            (neg|quest_slot_ge, "qst_wed_betrothed", slot_quest_expiration_days, 362),
+		   ## WINDYPLAINS+ ## - Don't inform me of a feast if I'm a prisoner.  It's annoying.
+		   (neg|troop_slot_ge, "trp_player", slot_troop_prisoner_of_party, 1),
+		   ## WINDYPLAINS- ##
            (call_script, "script_add_notification_menu", "mnu_notification_player_kingdom_holds_feast", ":feast_host", ":faction_object"),
          (else_try),
            (eq, "$players_kingdom", ":faction_no"),
            (troop_slot_ge, "trp_player", slot_troop_renown, 150),
-		   
-		   
+		   ## WINDYPLAINS+ ## - Don't inform me of a feast if I'm a prisoner.  It's annoying.
+		   (neg|troop_slot_ge, "trp_player", slot_troop_prisoner_of_party, 1),
+		   ## WINDYPLAINS- ##
            (party_get_slot, ":feast_host", ":faction_object", slot_town_lord),
            (call_script, "script_add_notification_menu", "mnu_notification_player_kingdom_holds_feast", ":feast_host", ":faction_object"),
          (try_end),
@@ -27696,6 +27722,13 @@ scripts = [
 	      (unlock_achievement, ACHIEVEMENT_KNIGHTS_OF_THE_ROUND),
 	    (try_end),
 	  (try_end),
+	  
+	  ## WINDYPLAINS+ ## - Oathbound - Hired companions get flagged as being a part of the player squad.
+	  (try_begin),
+		(neq, "$oathbound_status", OATHBOUND_STATUS_NOT_HIRED),
+		(troop_set_slot, ":troop_no", slot_troop_in_player_merc_group, 1),
+	  (try_end),
+	  ## WINDYPLAINS- ##
   ]),
   
 
@@ -27868,12 +27901,12 @@ scripts = [
 		(eq, "$g_player_court", ":center_no"),
 	    (faction_slot_eq, ":center_faction", slot_faction_leader, "trp_player"),
 	    (try_for_range, ":active_npc", active_npcs_begin, active_npcs_end),
-	      (store_faction_of_troop, ":active_npc_faction", ":active_npc"),
+		  (store_faction_of_troop, ":active_npc_faction", ":active_npc"),
 	      (eq, ":active_npc_faction", "fac_player_supporters_faction"),
 	      (troop_slot_eq, ":active_npc", slot_troop_occupation, slto_inactive),
 	      (neg|troop_slot_ge, ":active_npc", slot_troop_prisoner_of_party, 0), #if he/she is not prisoner in any center.
 	      (neq, ":active_npc", "$g_player_minister"),
-	      (set_visitor, ":cur_pos", ":active_npc"),	      
+		  (set_visitor, ":cur_pos", ":active_npc"),	      
 	      (val_add,":cur_pos", 1),
 		(try_end),
 	  (try_end),	  
@@ -27882,7 +27915,11 @@ scripts = [
       (party_get_num_companion_stacks, ":num_stacks","p_temp_party"),
       (try_for_range, ":i_stack", 0, ":num_stacks"),
         (party_stack_get_troop_id, ":stack_troop","p_temp_party",":i_stack"),
-        (lt, ":cur_pos", 32), # spawn up to entry point 32 - is it possible to add another 10 spots?
+		## WINDYPLAINS+ ## - Oathbound - Prevent player & companions from showing up in castle halls.
+		(neq, ":stack_troop", "trp_player"),
+		(neg|troop_slot_eq, ":stack_troop", slot_troop_in_player_merc_group, 1),
+		## WINDYPLAINS- ##
+		(lt, ":cur_pos", 32), # spawn up to entry point 32 - is it possible to add another 10 spots?
         (set_visitor, ":cur_pos", ":stack_troop"),
         (val_add,":cur_pos", 1),
       (try_end),
@@ -27988,7 +28025,7 @@ scripts = [
 		(eq, ":lady_meets_visitors", 1),
 		
         (lt, ":cur_pos", 32), # spawn up to entry point 32
-        (set_visitor, ":cur_pos", ":cur_troop"),
+		(set_visitor, ":cur_pos", ":cur_troop"),
         (val_add,":cur_pos", 1),
       (try_end),
       
@@ -29516,7 +29553,6 @@ scripts = [
 		(eq, ":quest_no", "qst_organize_feast"),
 		(call_script, "script_add_notification_menu", "mnu_notification_feast_quest_expired", 0, 0),
 	  (try_end),
-	  
 	  
       (call_script, "script_end_quest", ":quest_no"),
   ]),
@@ -37244,6 +37280,16 @@ scripts = [
       (else_try),  
         (eq, ":quest_target", -1), #if (always run) quest target
         (assign, ":continue", 1),
+	  ## WINDYPLAINS+ ## - Oathbound - Prevent taking NOBLE prisoners while contracted and in party.
+	  (else_try),
+		(eq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED),
+		(try_begin),
+			(ge, "$oathbound_debugging", 1),
+			(str_store_troop_name, s31, ":troop_no"),
+			(display_message, "@DEBUG (Oathbound): {s31} allowed to escape due to CONTRACTED status.", gpu_debug),
+		(try_end),
+		(assign, ":continue", 1),
+		## WINDYPLAINS- ##
       (try_end),  
       
       (eq, ":continue", 1),
@@ -52092,6 +52138,9 @@ scripts = [
 			(eq, "$show_autoloot_data", 1),         # We're looking at troop data.
 			(call_script, "script_hub_initialize"), # hub_scripts.py
 		(try_end),
+		
+		## Oathbound Quests
+		(call_script, "script_oath_refresh_unique_scripts"),
 	]),
 	
 # script_cf_troop_is_non_array
@@ -52153,6 +52202,7 @@ scripts = [
 		(assign, "$enable_stamina_bar_ui", 1),           # (TEMPORARY) Block stamina bar appearance while it is being fixed.
 		(assign, "$tpe_block_quests", 0),                # Blocks tournament quests from occurring.
 		(assign, "$cms_days_of_food_threshold", 3),      # Sets up a minimum days of food left warning for the player.
+		(assign, "$option_silent_sprinting", 0),         # Prevents sprinters from making war cries.
 		
 		## PBOD Defaults
 		(party_set_slot, "p_main_party", slot_party_pref_wu_lance, 1),
@@ -52193,8 +52243,9 @@ scripts = [
         (try_end),
 		
 		## INITIALIZE SYSTEMS.
-		(call_script, "script_garrison_initialize"), # garrison_scripts.py
-		(call_script, "script_kmt_initialize_custom_titles"), # kmt_scripts.py
+		(call_script, "script_garrison_initialize"), 			# garrison_scripts.py
+		(call_script, "script_kmt_initialize_custom_titles"), 	# kmt_scripts.py
+		(call_script, "script_oath_refresh_unique_scripts"),	# oath_scripts.py
 		
 		## SETUP METRICS.
 		(try_for_range, ":slot_no", 0, 400),

@@ -1,0 +1,22 @@
+COMMIT 260:
+-Improved damage of Awlpikes, can't be used with shields anymore, removed itc_cutting_spear
+-bec_de_corbin_a - removed itc_cutting_spear
+-mod_pike1 - added itp_offset_lance
+War Mace (faradon_mace)				\
+War Club (faradon_club)				>	added thrust damage
+Iron War Club (faradon_iron_club)	/
+sarranid_two_handed_mace_1 - fixed the name (Balanced mace -> Sarranid War Mace)
+flamberge_b_alt - changed to polearm as intended
+
+COMMIT 265:	
+Added I6 Mercenary Doppelsoldner
+
+COMMIT 270:
+-fixed attack animations for sarranid_axe_a and sarranid_axe_b
+-added mounted swing attack for staves
+-replaced Goedendag with Flachion for Rhodok Scouts
+Ticket 1808:
+-fixed missing tf_guarantee_helmet for Grunwalder Castle Voulgier, Veluca Pikeman, Mamluke Mounted Archer, Curaw Guardsman, Khergit Shaman
+-fixed missing helmet for Yaleni Dyoken, Jamiche Border Guard (now T4)
+-fixed outrider of nelag and vaegir pecheneg no horse archery skill
+-fixed r_nord_skald_2 helmet and armour problem

@@ -653,6 +653,9 @@ common_battle_tab_press = (
 	  (call_script, "script_simulate_retreat", 5, 20, 0),
 	  (call_script, "script_count_mission_casualties_from_agents"),
 	  (set_mission_result, -1),
+	  ## WINDYPLAINS+ ## - Oathbound - Keep Battlefield Loot
+	  (call_script, "script_oath_keep_field_loot"), # oath_scripts.py
+	  ## WINDYPLAINS- ##
 	  (finish_mission,0),
 	## WINDYPLAINS- ##
     (else_try),
@@ -906,6 +909,9 @@ common_battle_check_victory_condition = (
     ],
   [
     (call_script, "script_count_mission_casualties_from_agents"),
+	## WINDYPLAINS+ ## - Oathbound - Keep Battlefield Loot
+	(call_script, "script_oath_keep_field_loot"), # oath_scripts.py
+	## WINDYPLAINS- ##
     (finish_mission, 1),
     ])
 

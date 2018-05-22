@@ -11374,6 +11374,15 @@ presentations = [
 		(try_end),
 		## WINDYPLAINS- ##
       (try_end),
+	  ## WINDYPLAINS+ ## - Oathbound (Weekly Pay) - Add spacing for payment line.
+	  (try_begin),
+		(ge, "$oathbound_master", 1),
+		(this_or_next|eq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED), 	# You do get paid for being in the party.
+		(eq, "$oathbound_status", OATHBOUND_STATUS_AWAY), 						# You do get paid for being on a mission.
+		(eq, "$oathbound_leave_granted", 0), 									# You don't get paid for being on leave.
+		(val_add, ":num_lines", 1),
+	  (try_end),
+	  ## WINDYPLAINS- ##
       (try_begin),
         (gt, "$players_kingdom", 0),
         (neq, "$players_kingdom", "fac_player_supporters_faction"),
@@ -11414,6 +11423,47 @@ presentations = [
       (val_add, ":num_lines", 3),
       (store_mul, ":cur_y", 27, ":num_lines"),
       (assign, ":net_change", 0), #this is the amount added
+	  ## WINDYPLAINS+ ## - Oathbound (Weekly Pay) - Payment Code
+	  (try_begin),
+		(ge, "$oathbound_master", 1),
+		(this_or_next|eq, "$oathbound_status", OATHBOUND_STATUS_CONTRACTED), 	# You do get paid for being in the party.
+		(eq, "$oathbound_status", OATHBOUND_STATUS_AWAY), 						# You do get paid for being on a mission.
+		(eq, "$oathbound_leave_granted", 0), 									# You don't get paid for being on leave.
+		# Generate our budget line. (description)
+		(str_store_troop_name, s21, "$oathbound_master"),
+		(create_text_overlay, reg1, "@Oathbound Service to {s21}", 0),
+		(position_set_x, pos1, 900),
+		(position_set_y, pos1, 900),
+		(overlay_set_size, reg1, pos1),
+		(position_set_x, pos1, 25),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		# Generate our budget line. (value)
+		(call_script, "script_oath_calculate_weekly_pay"), # Returns reg1 (pay)
+		(assign, reg2, reg1),
+		(assign, ":oathbound_pay", reg1),
+		(create_text_overlay, reg1, "@{!}{reg2}", tf_right_align|tf_single_line),
+		(overlay_set_color, reg1, 0x00AA00),
+		(position_set_x, pos1, 900),
+		(position_set_y, pos1, 900),
+		(overlay_set_size, reg1, pos1),
+		(position_set_x, pos1, 500),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		(val_sub, ":cur_y", 27),
+		# Alter our calculations.
+		(val_add, ":all_centers_accumulated_total", ":oathbound_pay"),
+        (val_add, ":net_change", ":oathbound_pay"),
+		## Each week while you're serving gain +2 reputation, +6 rating & +1 relation with $oathbound_master.
+		(try_begin),
+			(eq, "$g_apply_budget_report_to_gold", 1),
+			(call_script, "script_oath_change_oathbound_rating", 6),
+			(call_script, "script_oath_change_oathbound_reputation", 2),
+			(call_script, "script_change_player_relation_with_troop", "$oathbound_master", 1, 0),
+			(assign, "$oathbound_bounty_count", 0), # Reset our bounty payments.
+		(try_end),
+	  (try_end), 
+	  ## WINDYPLAINS- ##
       (try_for_range, ":center_no", centers_begin, centers_end),		
 		#Enterprise
         (try_begin),
