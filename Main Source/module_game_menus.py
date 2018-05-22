@@ -8126,7 +8126,7 @@ game_menus = [
   
   
 (
-    "requested_castle_granted_to_another",mnf_scale_picture,
+    "requested_castle_granted_to_another", mnf_scale_picture,
     "You receive a message from your monarch, {s3}.^^\
  'I was most pleased to hear of your valiant efforts in the capture of {s2}. Your victory has gladdened all our hearts.\
  You also requested me to give you ownership of the castle, but that is a favour which I fear I cannot grant,\
@@ -8139,32 +8139,33 @@ game_menus = [
      (str_store_troop_name, s3, ":faction_leader"),
      (str_store_party_name, s2, "$g_center_to_give_to_player"),
      (party_get_slot, ":new_owner", "$g_center_to_give_to_player", slot_town_lord),
-	 (str_store_troop_name, s5, ":new_owner"),
-	 (party_get_slot, ":money", "$g_center_to_give_to_player", slot_town_prosperity),
-	 (val_mul, ":money", 30),
-	 (val_add, ":money", 600),
-	 (assign, reg6, ":money"),
-	 (assign, "$g_castle_requested_by_player", -1),
-	 (assign, "$g_castle_requested_for_troop", -1),
-    ],
-    [
-      ("accept_decision",[],"Accept the decision.",
-       [
-       (call_script, "script_troop_add_gold", "trp_player", reg6),
-       (change_screen_return),
-       ]),
-	   
-       ("leave_faction",[],"You have been wronged! Renounce your oath to your liege! ",
-       [
-         (jump_to_menu, "mnu_leave_faction"),
-         (call_script, "script_troop_add_gold", "trp_player", reg6),
-        ]),
+     (str_store_troop_name, s5, ":new_owner"),
+     (party_get_slot, ":money", "$g_center_to_give_to_player", slot_town_prosperity),
+     (val_mul, ":money", 30),
+     (val_add, ":money", 600),
+     (assign, reg6, ":money"),
+     (assign, "$g_castle_requested_by_player", -1),
+     (assign, "$g_castle_requested_for_troop", -1),
      ],
-  ),
+    [
+        ("accept_decision", [], "Accept the decision.",
+         [
+            (call_script, "script_troop_add_gold", "trp_player", reg6),
+            (change_screen_return),
+        ]),
 
-  
+        ("leave_faction", [], "You have been wronged! Renounce your oath to your liege! ",
+         [
+            (jump_to_menu, "mnu_leave_faction"),
+            (call_script, "script_troop_add_gold", "trp_player", reg6),
+        ]),
+    ],
+),
+
+
+
 (
-    "requested_castle_granted_to_another_female",mnf_scale_picture,
+    "requested_castle_granted_to_another_female", mnf_scale_picture,
     "You receive a message from your monarch, {s3}.^^\
  'I was most pleased to hear of your valiant efforts in the capture of {s2}. Your victory has gladdened all our hearts.\
  You also requested me to give ownership of the castle to your husband, but that is a favour which I fear I cannot grant,\
@@ -8177,23 +8178,25 @@ game_menus = [
      (str_store_troop_name, s3, ":faction_leader"),
      (str_store_party_name, s2, "$g_center_to_give_to_player"),
      (party_get_slot, ":new_owner", "$g_center_to_give_to_player", slot_town_lord),
-	 (str_store_troop_name, s5, ":new_owner"),
-	 (party_get_slot, ":money", "$g_center_to_give_to_player", slot_town_prosperity),
-	 (val_mul, ":money", 30),
-	 (val_add, ":money", 600),
-	 (assign, reg6, ":money"),
-	 (assign, "$g_castle_requested_by_player", -1),
-	 (assign, "$g_castle_requested_for_troop", -1),
-    ],
-	
+     (str_store_troop_name, s5, ":new_owner"),
+     (party_get_slot, ":money", "$g_center_to_give_to_player", slot_town_prosperity),
+     (val_mul, ":money", 30),
+     (val_add, ":money", 600),
+     (assign, reg6, ":money"),
+     (assign, "$g_castle_requested_by_player", -1),
+     (assign, "$g_castle_requested_for_troop", -1),
+     ],
+
     [
-		("accept_decision",[],"Accept the decision.",
-        [
-        (call_script, "script_troop_add_gold", "trp_player", reg6),
-        (change_screen_return),
+        ("accept_decision", [], "Accept the decision.",
+         [
+            (call_script, "script_troop_add_gold", "trp_player", reg6),
+            (change_screen_return),
         ]),
     ],
 ),
+
+
   
   
   
