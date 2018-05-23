@@ -276,7 +276,7 @@ tpe_standard_triggers = [
 				(agent_get_team, ":agent_team", ":agent_no"),
 				(agent_get_troop_id, ":troop_id", ":agent_no"),
 				## WINDYPLAINS+ ## - Combat Ability - BONUS_BERKSERER / BONUS_DISCIPLINE - Remove extra health post combat.
-				(call_script, "script_ce_reset_agent_max_health", ":agent_no"), # combat_scripts.py
+				# (call_script, "script_ce_reset_agent_max_health", ":agent_no"), # combat_scripts.py
 				## WINDYPLAINS- ##
 				(try_begin),
 					(eq, ":agent_team", ":best_team"),

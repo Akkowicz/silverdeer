@@ -1336,7 +1336,6 @@ combat_enhancement_triggers = [
 		(store_trigger_param_1, ":agent_no"),
 		
 		(agent_get_troop_id, ":troop_no", ":agent_no"),
-		
 		## Tossed in to setup modified speed later on.
 		(call_script, "script_ce_get_troop_base_movement_speed", ":troop_no", SPEED_FACTOR_TOTAL),
 		(agent_set_slot, ":agent_no", slot_agent_last_calculated_speed, reg1),
@@ -1352,7 +1351,7 @@ combat_enhancement_triggers = [
 		(assign, ":extra_health", reg1),
 		(store_agent_hit_points, ":base_health", ":agent_no", 1),
 		(val_add, ":base_health", ":extra_health"),
-		(agent_set_max_hit_points, ":agent_no", ":base_health", 1),
+		(agent_set_hit_points, ":agent_no", ":base_health", 1),
 		(try_begin),
 			(ge, DEBUG_TROOP_ABILITIES, 2),
 			(eq, ":troop_no", "trp_player"),

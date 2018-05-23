@@ -36017,7 +36017,7 @@ scripts = [
        (neg|agent_is_alive, ":cur_agent"),
        (agent_get_troop_id, ":agent_troop_id", ":cur_agent"),
 	   ## WINDYPLAINS+ ## - Combat Ability - BONUS_BERKSERER / BONUS_DISCIPLINE - Remove extra health post combat.
-	   (call_script, "script_ce_reset_agent_max_health", ":cur_agent"), # combat_scripts.py
+	   # (call_script, "script_ce_reset_agent_max_health", ":cur_agent"), # combat_scripts.py
 	   ## WINDYPLAINS- ##
        (try_begin),
          (eq, ":agent_party", "p_main_party"),

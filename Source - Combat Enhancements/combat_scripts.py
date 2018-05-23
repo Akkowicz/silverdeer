@@ -1920,27 +1920,29 @@ scripts = [
 # EXAMPLE: (call_script, "script_ce_reset_agent_max_health", ":agent_no"), # combat_scripts.py - ability constants in combat_constants.py
 ("ce_reset_agent_max_health",
     [
-		(store_script_param, ":agent_no", 1),
+		# (store_script_param, ":agent_no", 1),
 		
-		(agent_get_troop_id, ":troop_no", ":agent_no"),
-		(try_begin),
-			(eq, 1, 0), # Blocked due to hero health resetting issues after each round.
-			(troop_is_hero, ":troop_no"),
-			(call_script, "script_ce_troop_get_bonus_health", ":troop_no"), # combat_scripts.py
-			(assign, ":extra_health", reg1),
-			(store_agent_hit_points, ":base_health", ":agent_no", 1),
-			(assign, ":initial_health", ":base_health"),
-			(val_sub, ":base_health", ":extra_health"),
-			(try_begin),
-				(ge, ":initial_health", 1),
-				(val_max, ":base_health", 1), # This shouldn't kill a troop.
-			(else_try),
-				(assign, ":base_health", 0),
-			(try_end),
-			(agent_set_hit_points, ":agent_no", ":base_health", 1),
-			(store_troop_health, ":max_health", ":troop_no", 1),
-			(agent_set_max_hit_points, ":agent_no", ":max_health", 1),
-	   (try_end),
+		# (agent_get_troop_id, ":troop_no", ":agent_no"),
+		# (try_begin),
+		# 	(eq, 1, 0), # Blocked due to hero health resetting issues after each round.
+			# (troop_is_hero, ":troop_no"),
+			# (call_script, "script_ce_troop_get_bonus_health", ":troop_no"), # combat_scripts.py
+			# (assign, ":extra_health", reg1),
+			# (agent_set_hit_points, ":agent_no", 50),
+			# (display_message, "@DEBUG Pierdolony skrypt sie odpala."),
+			# (store_agent_hit_points, ":base_health", ":agent_no", 1),
+			# (assign, ":initial_health", ":base_health"),
+			# (val_sub, ":base_health", ":extra_health"),
+			# (try_begin),
+			# 	(ge, ":initial_health", 1),
+			# 	(val_max, ":base_health", 1), # This shouldn't kill a troop.
+			# (else_try),
+			# 	(assign, ":base_health", 0),
+			# (try_end),
+			# (agent_set_hit_points, ":agent_no", ":base_health", 1),
+			# (store_troop_health, ":max_health", ":troop_no", 1),
+			# (agent_set_max_hit_points, ":agent_no", ":max_health", 1),
+	   # (try_end),
 	]),
 	
 # script_ce_get_troop_base_movement_speed
