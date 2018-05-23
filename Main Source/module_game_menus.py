@@ -5363,14 +5363,15 @@ game_menus = [
 					(store_sub, ":amount", ":main_troop_count", ":sub_troop_count"), #calculate number of troops to adjust
 					(party_remove_members, "p_main_party", ":stack_troop", ":amount"), #adjust number of troops in the main party
 				(try_end),
-				#wound the members, only if there are less wounded in the main party
-				(party_stack_get_num_wounded, ":num_wounded_sub", "p_temp_casualties_3", ":stack_troop"),
-				(party_stack_get_num_wounded, ":num_wounded_main", "p_main_party", ":stack_troop"),
-				(try_begin),
-					(gt, ":num_wounded_sub", ":num_wounded_main"), #sub has more wounded
-					(store_sub, ":amount", ":num_wounded_sub", ":num_wounded_main"), #calculate number of troops to wound
-					(party_wound_members, "p_main_party", ":stack_troop", ":amount"),
-				(try_end),
+        # FIX - bodyslided parties got wounded twice
+				# wound the members, only if there are less wounded in the main party
+				# (party_stack_get_num_wounded, ":num_wounded_sub", "p_temp_casualties_3", ":stack_troop"),
+				# (party_stack_get_num_wounded, ":num_wounded_main", "p_main_party", ":stack_troop"),
+				# (try_begin),
+				# 	(gt, ":num_wounded_sub", ":num_wounded_main"), #sub has more wounded
+				# 	(store_sub, ":amount", ":num_wounded_sub", ":num_wounded_main"), #calculate number of troops to wound
+				# 	(party_wound_members, "p_main_party", ":stack_troop", ":amount"),
+				# (try_end),
 			(try_end),
 
 			##adjust the party based on the casualties sustained on the battlefield
@@ -5381,6 +5382,8 @@ game_menus = [
 				(party_stack_get_size, ":stack_size","p_player_casualties",":stack_no"),
 				(party_stack_get_num_wounded, ":num_wounded", "p_player_casualties", ":stack_no"),
 				(val_sub, ":stack_size", ":num_wounded"),
+        ## FIX - Player is not a regular troop, stop wounding other troops for him
+        (val_sub, ":num_wounded", 1),
 				(party_remove_members, "p_main_party", ":stack_troop", ":stack_size"), 
 				(party_wound_members, "p_main_party", ":stack_troop", ":num_wounded"),
 			(try_end),
