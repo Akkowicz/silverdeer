@@ -2,12 +2,6 @@
 #make sure to modify build path in Main Source/module-info.py; note that the compiler will need absolute path in module_info.py
 #you will probably need python 2.x(my is 2.7.8);
 
-#switch module_info.py for my version
-
-mv ./'Main Source'/module_info.py ./'Main Source'/module_info.py.windy
-mv ./'Main Source'/module_info.py.leifdin ./'Main Source'/module_info.py
-ls ./'Main Source'/module_info*
-
 cp ./'Main Source'/*.py ./ >>Process_Log.txt
 cp ./'Modmerger/'*.py ./ >>Process_Log.txt
 cp ./'Source - Compiler'/*.py ./ >>Process_Log.txt
@@ -45,9 +39,5 @@ python compile.py tag %1 %2 %3 %4 %5 %6 %7 %8 %9
 cp ID_*.py ./'Main Source'/ >>Process_Log.txt
 rm *.py
 rm Process_Log.txt
-
-#move the old module_info.py back
-mv ./'Main Source'/module_info.py ./'Main Source'/module_info.py.leifdin
-mv ./'Main Source'/module_info.py.windy ./'Main Source'/module_info.py
 
 echo done
