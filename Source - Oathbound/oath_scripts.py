@@ -25,7 +25,9 @@ scripts = [
 # PURPOSE: Merges the player party into the $oathbound_master's party.
 # EXAMPLE: (call_script, "script_oath_join_master_party", ":party_no"),
 ("oath_join_master_party",
-    [
+    [	
+    	#store joining date in global variable for payment system
+    	(store_current_day, "$join_date"),
 		#needed to stop bug where parties attack the old player party
 		(call_script, "script_set_parties_around_player_ignore_player", 2, 4),
 		

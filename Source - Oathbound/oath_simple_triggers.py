@@ -144,7 +144,15 @@ simple_triggers = [
 			(call_script, "script_oath_lord_decides_if_leave_is_okay"),	# $oathbound_master determines if people can leave.
 			(val_add, "$oathbound_time_since_leave", 1),				# Add time since the last time player was on leave.
 			(val_add, "$oathbound_hours_since_visit", 1),				# Tracks how long since we last triggered the oathbound interface at a fief.
-			
+			# Changes for payment system
+			(store_current_day, ":current_date"),
+			(store_sub, ":diff_date", ":current_date", "$join_date"),
+			(try_begin),
+				(ge, ":diff_date", 7),
+				(assign, "$join_date", ":current_date"),
+				(call_script, "script_oath_calculate_weekly_pay"),
+				(call_script, "script_troop_add_gold", "trp_player", reg1),
+			(try_end),
 			### DIAGNOSTIC+ ###
 			(try_begin),
 				(ge, "$oathbound_debugging", 1),
