@@ -107,8 +107,7 @@ presentations = [
 		(str_store_string, s21, "@Weekly Pay:"),
 		(call_script, "script_gpu_create_text_label", "str_oath_s21", ":pox_x_col_1", ":pos_y", 0, gpu_left),
 		(call_script, "script_gpu_resize_object", 0, 75),
-		(store_troop_faction, ":faction_no", "$oathbound_master"),
-		(call_script, "script_oath_calculate_weekly_pay", ":faction_no"), # Returns reg1 (pay)
+		(call_script, "script_oath_calculate_weekly_pay"), # Returns reg1 (pay)
 		(str_store_string, s21, "@{reg1} denars"),
 		(call_script, "script_gpu_create_text_label", "str_oath_s21", ":pos_x_col_2", ":pos_y", 0, gpu_left),
 		(call_script, "script_gpu_resize_object", 0, 75),
@@ -789,6 +788,8 @@ presentations = [
 		(val_add, ":total_pay", ":reputation_bonus"),
 		(call_script, "script_oath_convert_value_to_denars_string", ":total_pay", "str_oath_denar"), # Returns s20 (value), reg20 (color code)
 		(assign, reg21, ":total_pay"),
+		# Create global total_pay variable for payment system
+		(assign, "$total_pay", ":total_pay"),
 		(assign, ":color", reg20),
 		(str_store_string, s21, "@{reg21}"),
 		(call_script, "script_gpu_create_text_label", "str_oath_s21", ":x_col_value", ":pos_y", 0, gpu_right),

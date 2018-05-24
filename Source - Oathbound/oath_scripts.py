@@ -26,8 +26,6 @@ scripts = [
 # EXAMPLE: (call_script, "script_oath_join_master_party", ":party_no"),
 ("oath_join_master_party",
     [	
-    	#store joining date in global variable for payment system
-    	(store_current_day, "$join_date"),
 		#needed to stop bug where parties attack the old player party
 		(call_script, "script_set_parties_around_player_ignore_player", 2, 4),
 		
@@ -222,6 +220,8 @@ scripts = [
 			(eq, ":new_status", OATHBOUND_STATUS_CONTRACTED),
 			
 			## Setup contract timer.
+			#store joining date in global variable for payment system
+			(store_current_day, "$join_date"),
 			(store_current_hours, ":start_hours"),
 			(assign, "$oathbound_contract_started", ":start_hours"),
 			(assign, "$oathbound_remaining_hours", OATHBOUND_CONTRACT_DURATION),
@@ -1362,109 +1362,109 @@ scripts = [
 	
 # script_oath_calculate_weekly_pay
 # PURPOSE: This determines how much pay your character should receive on a weekly basis for your contract.
-# EXAMPLE: (call_script, "script_oath_calculate_weekly_pay", ":faction_no"), # Returns reg1 (pay)
+# EXAMPLE: (call_script, "script_oath_calculate_weekly_pay"), # Returns reg1 (pay)
 ("oath_calculate_weekly_pay",
     [
-	    (store_script_param, ":faction_no", 1),
-		# Note: "Pay Factors" directly add to your base payment.
-		#       "Bonus Factors" combine to give you a percentage increase to your base payment.
-		
-		(assign, ":pay_base", OATHBOUND_BASE_PAY_VALUE),
-		(assign, ":bonus_factor", 0),
-		
-		## PAY FACTOR - Character Level - +(Level-5)/3*25
+	    (assign, ":total_base_pay", 0),
+		# Value
+		(assign, reg21, OATHBOUND_BASE_PAY_VALUE),
+		(val_add, ":total_base_pay", OATHBOUND_BASE_PAY_VALUE),
 		(store_character_level, ":level", "trp_player"),
-		(val_clamp, ":level", 1, 51),
-		(val_sub, ":level", 5),
-		(val_div, ":level", 3),
-		(val_mul, ":level", 25),
-		(val_add, ":pay_base", ":level"),
+		(assign, reg1, ":level"),
+		(store_sub, ":pay", ":level", 5),
+		(val_div, ":pay", 3),
+		(val_mul, ":pay", 25),
+		(val_add, ":total_base_pay", ":pay"),
+		(assign, reg21, ":pay"),
+		(store_character_level, ":level", "trp_player"),
+		(assign, reg21, OATHBOUND_BOUNTY_PAY),
+		(assign, reg22, "$oathbound_bounty_count"),
+		(store_sub, reg23, reg22, 1),
+		(store_mul, ":pay", "$oathbound_bounty_count", OATHBOUND_BOUNTY_PAY),
+		(val_add, ":total_base_pay", ":pay"),
+		(assign, reg21, ":pay"),
+		(assign, reg21, ":total_base_pay"),
 		
-		## BONUS FACTOR - Oathbound Rank
-		(faction_get_slot, ":faction_rank", ":faction_no", slot_faction_oathbound_rank),
-		# (call_script, "script_oath_get_current_oathbound_rank"), # Stores reg1 (rank)
-		(call_script, "script_oath_describe_oathbound_rank", ":faction_rank"), # Stores s1 (rank name), s2 (rank title), reg0 (pay boost)
-		(assign, ":rank", reg0),
-		(val_add, ":bonus_factor", reg0),
 		
-		## BONUS FACTOR - Oathbound Reputation
-		# (store_troop_faction, ":faction_no", "$oathbound_master"),
-		(faction_get_slot, ":reputation_raw", ":faction_no", slot_faction_oathbound_reputation),
-		(call_script, "script_oath_get_reputation_pay_factor", ":reputation_raw"), # Returns reg1 (value)
-		(assign, ":reputation", reg1),
-		(val_add, ":bonus_factor", ":reputation"),
+		###########################
+		### PERCENT PAY FACTORS ###
+		###########################
+		(assign, ":total_percent_pay", 0),
 		
-		## BONUS FACTOR - Player Skill / Persuasion - +3% / rank
-		(store_skill_level, ":skill_persuasion", "skl_persuasion", "trp_player"),
-		(val_mul, ":skill_persuasion", 3),
-		(val_add, ":bonus_factor", ":skill_persuasion"),
-		
-		## BONUS FACTOR - Party Skill / Tracking
-		(party_get_skill_level, ":skill_tracking", "p_main_party", "skl_tracking"),
-		(val_mul, ":skill_tracking", 3),
-		(val_add, ":bonus_factor", ":skill_tracking"),
-		
-		## BONUS FACTOR - Party Skill / Surgery
-		(party_get_skill_level, ":skill_surgery", "p_main_party", "skl_surgery"),
-		(val_mul, ":skill_surgery", 4),
-		(val_add, ":bonus_factor", ":skill_surgery"),
-		
-		## BONUS FACTOR - Party Skill / First Aid
-		(party_get_skill_level, ":skill_first_aid", "p_main_party", "skl_first_aid"),
-		(val_mul, ":skill_first_aid", 3),
-		(val_add, ":bonus_factor", ":skill_first_aid"),
-		
-		## BONUS FACTOR - Party Skill / Spotting
-		(party_get_skill_level, ":skill_spotting", "p_main_party", "skl_spotting"),
-		(val_mul, ":skill_spotting", 2),
-		(val_add, ":bonus_factor", ":skill_spotting"),
-		
-		## BONUS FACTOR - Party Skill / Path-finding
-		(party_get_skill_level, ":skill_pathfinding", "p_main_party", "skl_pathfinding"),
-		(val_mul, ":skill_pathfinding", 2),
-		(val_add, ":bonus_factor", ":skill_pathfinding"),
-		
-		## BONUS FACTOR - Party Skill / Engineer
-		(party_get_skill_level, ":skill_engineer", "p_main_party", "skl_engineer"),
-		(val_mul, ":skill_engineer", 4),
-		(val_add, ":bonus_factor", ":skill_engineer"),
-		
-		## BONUS FACTOR - Party Skill / Wound Treatment
-		(party_get_skill_level, ":skill_wound_treatment", "p_main_party", "skl_wound_treatment"),
-		(val_mul, ":skill_wound_treatment", 3),
-		(val_add, ":bonus_factor", ":skill_wound_treatment"),
-		
-		## SECTION: Apply bonus factors to base pay.
-		(store_mul, ":pay_bonus", ":pay_base", ":bonus_factor"),
-		(val_div, ":pay_bonus", 100),
-		
-		(store_add, ":pay", ":pay_base", ":pay_bonus"),
-		(assign, reg1, ":pay"),
-		
-		### DIAGNOSTIC+ ###
-		(try_begin),
-			(ge, "$oathbound_debugging", 2),
-			(assign, reg31, ":pay_base"),
-			(assign, reg32, ":pay_bonus"),
-			(assign, reg33, ":level"),
-			(assign, reg34, ":rank"),
-			(assign, reg35, ":reputation"),
-			(assign, reg36, ":skill_persuasion"),
-			(assign, reg37, ":skill_tracking"),
-			(assign, reg38, ":skill_surgery"),
-			(assign, reg39, ":skill_first_aid"),
-			(assign, reg40, ":skill_spotting"),
-			(assign, reg41, ":skill_pathfinding"),
-			(assign, reg42, ":skill_engineer"),
-			(assign, reg43, ":skill_wound_treatment"),
-			(assign, reg44, ":pay"),
-			(assign, reg45, ":bonus_factor"),
-			(display_message, "@DEBUG (Oathbound): Pay = Base {reg31} + {reg32} = {reg44} denars"),
-			(display_message, "@DEBUG (Oathbound): Base = 125 + {reg33} level"),
-			(display_message, "@DEBUG (Oathbound): Bonus = {reg34} rank + {reg35} rep + {reg36} pers + {reg37} track + {reg38} surg"),
-			(display_message, "@DEBUG (Oathbound):       = {reg39} aid + {reg40} spot + {reg41} path + {reg42} eng + {reg43} wound = {reg45}%"),
+		(call_script, "script_oath_get_current_oathbound_rank"), # Stores reg1 (rank)
+		(call_script, "script_oath_describe_oathbound_rank", reg1), # Stores s1 (rank name), s2 (rank title), reg0 (pay boost)
+		(assign, ":bonus", reg0),
+		(assign, reg21, ":bonus"),
+		(val_add, ":total_percent_pay", ":bonus"),
+		## LINES 2 to 9 - Skills: Persuasion, Surgery, First Aid, Wound Treatment, Engineer, Path-finding, Spotting & Tracking
+		(try_for_range, ":skill_no", "skl_trade", "skl_reserved_18"),
+			(this_or_next|eq, ":skill_no", "skl_persuasion"),
+			(this_or_next|eq, ":skill_no", "skl_surgery"),
+			(this_or_next|eq, ":skill_no", "skl_first_aid"),
+			(this_or_next|eq, ":skill_no", "skl_wound_treatment"),
+			(this_or_next|eq, ":skill_no", "skl_engineer"),
+			(this_or_next|eq, ":skill_no", "skl_pathfinding"),
+			(this_or_next|eq, ":skill_no", "skl_spotting"),
+			(eq, ":skill_no", "skl_tracking"),
+			
+			# Get our relevant skill value.
+			(try_begin),
+				(eq, ":skill_no", "skl_persuasion"),
+				(store_skill_level, ":skill_level", ":skill_no", "trp_player"),
+			(else_try),
+				(party_get_skill_level, ":skill_level", "p_main_party", ":skill_no"),
+			(try_end),
+			
+			# Get our skill payment factor
+			(try_begin),
+				(this_or_next|eq, ":skill_no", "skl_surgery"),
+				(eq, ":skill_no", "skl_engineer"),
+				(assign, ":factor", 4),
+			(else_try),
+				(this_or_next|eq, ":skill_no", "skl_persuasion"),
+				(this_or_next|eq, ":skill_no", "skl_wound_treatment"),
+				(this_or_next|eq, ":skill_no", "skl_first_aid"),
+				(eq, ":skill_no", "skl_tracking"),
+				(assign, ":factor", 3),
+			(else_try),
+				(assign, ":factor", 2),
+			(try_end),
+			
+			# Name
+			(assign, reg1, ":skill_level"),
+			(assign, reg21, ":factor"),
+			(store_mul, ":bonus", ":skill_level", ":factor"),
+			(assign, reg21, ":bonus"),
+			(val_add, ":total_percent_pay", ":bonus"),
 		(try_end),
-		### DIAGNOSTIC- ###
+		
+		(assign, reg21, "$oathbound_contract_periods"),
+		(assign, reg22, OATHBOUND_RENEWAL_PAY_BOOST),
+		(store_mul, ":bonus", "$oathbound_contract_periods", OATHBOUND_RENEWAL_PAY_BOOST),
+		(assign, reg21, ":bonus"),
+		(val_add, ":total_percent_pay", ":bonus"),
+		(assign, reg21, ":total_percent_pay"),
+
+		(store_troop_faction, ":faction_no", "$oathbound_master"),
+		(call_script, "script_oath_describe_reputation_with_faction", ":faction_no"), # Stores s1 (reputation text), reg1 (reputation value)
+		(assign, ":reputation", reg1),
+		(call_script, "script_oath_get_reputation_pay_factor", ":reputation"), # Returns reg1 (value)
+		(assign, ":reputation_multiplier", reg1),
+		(assign, reg21, ":reputation_multiplier"),
+
+		(assign, reg21, ":total_base_pay"),
+		(assign, reg22, ":total_percent_pay"),
+		(store_mul, ":bonus_pay", ":total_base_pay", ":total_percent_pay"),
+		(val_div, ":bonus_pay", 100),
+		(store_add, ":total_pay", ":total_base_pay", ":bonus_pay"),
+		# Now tie in the reputation multiplier
+		(store_mul, ":reputation_bonus", ":total_pay", ":reputation_multiplier"),
+		(val_div, ":reputation_bonus", 100),
+		(val_add, ":total_pay", ":reputation_bonus"),
+		(assign, reg21, ":total_pay"),
+		# Create global total_pay variable for payment system
+		(assign, "$total_pay", ":total_pay"),
+		(assign, reg1, ":total_pay"),
 	]),
 
 # script_oath_get_reputation_pay_factor

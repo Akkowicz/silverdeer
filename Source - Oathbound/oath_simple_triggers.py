@@ -147,11 +147,12 @@ simple_triggers = [
 			# Changes for payment system
 			(store_current_day, ":current_date"),
 			(store_sub, ":diff_date", ":current_date", "$join_date"),
+			# If it's 7 days since last payment, add money to player
 			(try_begin),
 				(ge, ":diff_date", 7),
 				(assign, "$join_date", ":current_date"),
 				(call_script, "script_oath_calculate_weekly_pay"),
-				(call_script, "script_troop_add_gold", "trp_player", reg1),
+				(call_script, "script_troop_add_gold", "trp_player", "$total_pay"),
 			(try_end),
 			### DIAGNOSTIC+ ###
 			(try_begin),
