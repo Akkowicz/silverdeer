@@ -289,7 +289,7 @@ combat_enhancement_triggers = [
 	  
 		# Displays debug messages if turned on.
 		(try_begin), 
-			# (eq, DEBUG_COMBAT, 1),
+			(eq, DEBUG_COMBAT, 1),
 			(this_or_next|eq, ":troop_killer", "trp_player"),
 			(eq, DEBUG_COMBAT, 2),
 			(eq, ":disable_debug", 0),
@@ -312,7 +312,7 @@ combat_enhancement_triggers = [
 		(agent_set_hit_points, ":agent_killer", ":current_health", 0),
 		(store_agent_hit_points, reg32, ":agent_killer", 1),
 		(try_begin),
-			# (ge, DEBUG_COMBAT, 1),
+			(ge, DEBUG_COMBAT, 1),
 			(eq, ":troop_killer", "trp_player"),
 			(str_store_troop_name, s31, ":troop_killer"),
 			(display_message, "@DEBUG (Health Regen): {s31}'s health improved from {reg31} to {reg32}.", gpu_debug),
