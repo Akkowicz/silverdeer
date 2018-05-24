@@ -182,3 +182,6 @@ D3monic (v0.27+)
 
 CONTRIBUTORS
 Huillam (Vaegir Troops)
+
+FIXES
+Akkowicz
